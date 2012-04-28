@@ -25,8 +25,8 @@ class Order < ActiveRecord::Base
     ActiveMerchant::Billing::Base.mode = :production
     test = false
     gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new(
-          :login    => '9vLbG97Lfg8',
-          :password => '98g9574fkLeBmT8j',
+          :login    => 'authnetlogin',
+          :password => 'authnetpassword',
           :test => test
         )
     resp = gateway.void(auth_id)
@@ -61,8 +61,8 @@ class Order < ActiveRecord::Base
     #The Authorize.Net API Login ID
     #The Authorize.Net Transaction Key.
     #gateway = ActiveMerchant::Billing::TrustCommerceGateway.new(
-    #  :login    => '874554',  
-    #  :password => 'Whowamm7'
+    #  :login    => '838383',  
+    #  :password => '9383838'
     #)
     gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new(
       :login    => '9vLbG97Lfg8',  
