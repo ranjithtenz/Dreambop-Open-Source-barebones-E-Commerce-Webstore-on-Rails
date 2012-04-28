@@ -1,0 +1,18 @@
+<div class="section">YOUR ACCOUNT</div>
+<br/>
+<br/>
+<br/>
+<div id="entry-form">
+  You are logged in as <%= current_user.email %>
+  <p>
+  <%= link_to 'Change your password', change_password_path %>
+  </p>
+  <% if current_user.credit_card %>
+    <p>
+      <%= link_to 'Update your credit card details', edit_credit_card_path %>
+    </p>
+  <% end %>
+  <p>
+  <%= link_to 'Logout', logout_path %>
+  </p>
+</div>

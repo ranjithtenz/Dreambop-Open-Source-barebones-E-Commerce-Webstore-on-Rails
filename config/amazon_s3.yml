@@ -1,0 +1,15 @@
+development:
+  bucket_name: buymeyo_prod
+  access_key_id: 1KGQM1R0G4E04Q11EE82
+  secret_access_key: 8Qw1pJ59kgjxvIBPOfMizRDT1Z0KgGKPfvqpXLNU
+
+test:
+  bucket_name: appname_test
+  access_key_id: 
+  secret_access_key: 
+  distribution_domain: XXXX.cloudfront.net
+
+production:
+  bucket_name: buymeyo_prod
+  access_key_id: 1KGQM1R0G4E04Q11EE82
+  secret_access_key: 8Qw1pJ59kgjxvIBPOfMizRDT1Z0KgGKPfvqpXLNU

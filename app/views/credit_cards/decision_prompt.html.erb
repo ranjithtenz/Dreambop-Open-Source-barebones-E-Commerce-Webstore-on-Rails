@@ -1,0 +1,35 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'cart' %>
+<% end %>
+<div class="section">YOUR PAYMENT METHOD</div>
+<div id="decision">
+
+  <b>Select your payment method</b>
+  <br/>
+  <br/>
+    <%= form_for(:decision, :url => { :action => :decision, :controller => :credit_cards}) do |f| %>
+      <table id="payment_method">
+        <tr>
+          <td width="1%"><%= radio_button("payment_method", "id", "card") %></td>
+          <td>
+              <%= image_tag('/images/credit_card_logo.jpg', :width => '133', :height => '28') %>
+          </td>
+        </tr>
+
+        <tr>
+          <td width="1%"><%= radio_button("payment_method", "id", "paypal") %></td>
+          <td>
+              <img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" align="left" style="margin-right:7px;"><span style="font-size:11px; font-family: Arial, Verdana;">The safer, easier way to pay.</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td>&nbsp;</td>
+          <td><br/><br/><%= f.submit 'Select', :src => '/images/button_submit.jpg', :type => 'image' %> </td>
+        </tr>
+      </table>
+    <% end %>
+
+  <br />
+
+</div>

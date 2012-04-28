@@ -1,0 +1,17 @@
+<div class="products-container">
+<% products.each do |product| %>
+  <div class="product">
+    <div class="small_img">
+      <%= link_to(image_tag(product.image(150), :width => 150, :height => 150), product) %>
+    </div>
+    <div class="product-title">
+      <%= link_to( truncate(product.title, {:length => 49}), product) %>
+    </div>
+    <div class="product-price">
+      <%= link_to( number_to_currency(product.price), product) %>
+    </div>
+  </div>
+<% end %>
+</div>
+<div class="clear">
+</div>

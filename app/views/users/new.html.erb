@@ -1,0 +1,26 @@
+<div class="section">SIGN UP AS A NEW USER</div>
+<div id="entry-form">
+  <% @user.password = @user.password_confirmation = nil %>
+
+  <% if @user.errors.any? %>
+    <% @user.errors.full_messages.each do |msg| %>
+      <%= msg %><br>
+    <% end %>
+  <% end %> 
+  <%= form_for :user, :url => users_path do |f| -%>
+
+  <p><%= f.label :email %><br/>
+  <%= f.text_field :email %></p>
+
+  <p><%= f.label :password %><br/>
+  <%= f.password_field :password %></p>
+
+  <p><%= f.label :password_confirmation, 'Confirm Password' %><br/>
+  <%= f.password_field :password_confirmation %></p>
+
+  <div id="entry-form-submit">
+    <p><%= submit_tag 'Sign up', :src => '/images/button_submit.jpg', :type => 'image' %></p>
+  </div>
+  <% end -%>
+<p><%= link_to 'back to login', login_path %></p>
+</div>

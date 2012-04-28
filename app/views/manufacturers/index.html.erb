@@ -1,0 +1,23 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'categories', 'multi-prod' %>
+<% end %>
+<% content_for :page_title do -%>
+  Manufacturers
+<% end %>
+<div class="section"><%= 'MANUFACTURERS' %></div>
+<% i = 0 %>
+<% total = @manufacturers.size %>
+<% @manufacturers.each do |manufacturer| %>
+  <% if i == 0 or i % 20 == 0 %>
+    <div class="categories">
+  <% end %>
+      <span class="category">
+        <%= link_to manufacturer.manufacturer, :action => :show, :controller => 'manufacturers', :id => manufacturer.manufacturer.gsub(/ /, '+') %>
+      </span>
+      <br/>
+  <% if i % 20 == 19 or (i == total - 1) %>
+    </div>
+  <% end %>
+  <% i = i + 1 %>
+<% end %>
+<div class="clear"></div>

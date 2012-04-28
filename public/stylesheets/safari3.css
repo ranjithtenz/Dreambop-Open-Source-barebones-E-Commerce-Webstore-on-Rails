@@ -1,0 +1,10 @@
+#bg-main-image {
+  background-image:url('/images/background-main-db.jpg');
+  background-repeat: no-repeat;
+  min-width: 800px;
+  height:264px;
+  margin-left: 5px;
+  margin-right: auto;
+  width: 50em;
+  text-align: left;
+}

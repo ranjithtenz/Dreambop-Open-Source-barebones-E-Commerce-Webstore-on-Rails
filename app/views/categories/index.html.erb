@@ -1,0 +1,25 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'categories', 'multi-prod' %>
+<% end %>
+<% content_for :page_title do -%>
+  Everything broken down
+<% end %>
+<% content_for :page_meta do -%>
+  <meta name="title" content="dreambop.com: <%= @category.display_name %>: Excellent new products and unbeatable service" />
+  <meta name="description" content="dreambop.com: <%= @category.display_name %>: Excellent new products and unbeatable service" />
+  <meta name="keywords" content="fantastic online experience with superior information in an enjoyable way." />
+<% end %>
+<% content_for :page_title do -%>
+  Categories: <%= @category.display_name %>
+<% end %>
+<div id="breadcrumb">
+  <%= render :partial => 'locals/breadcrumb', :locals => { :breadcrumb => @breadcrumb } %>
+</div>
+<div class="section"><%= 'Category: ' + @category.display_name.upcase %></div>
+<%= render :partial => 'locals/products', :locals => {:products => @products } %>
+<% if @products.empty? %>
+  Sorry. No products were found for this category.
+<% end %>
+<div id="page_links">
+  <%= will_paginate(@products) %>
+</div>

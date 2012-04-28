@@ -1,0 +1,16 @@
+.categories {
+  padding-left: 10px;
+  padding-top: 15px;
+  float: left;
+}
+.category {
+  font-size: 1.3em
+}
+.more {
+  font-size: 0.8em
+}
+#breadcrumb {
+  padding-bottom: 35px;
+  padding-top: 10px;
+  font-size: 0.67em;
+}

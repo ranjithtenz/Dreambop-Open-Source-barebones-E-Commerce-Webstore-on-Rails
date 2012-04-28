@@ -1,0 +1,71 @@
+#picture {
+  float: left;
+  padding-top: 15px;
+  width: 300px;
+  height: 270px;
+  margin-left: 30px;
+}
+#description {
+  padding-top: 15px;
+  padding-left: 55px;
+  float: left;
+  width: 380px;
+  height: auto;
+}
+span#description-text {
+  font-size: 0.8em;
+  color: #98988c;
+  line-height: 2em;
+}
+#price {
+  padding-top: 30px;
+  padding-left: 135px;
+}
+#price-text {
+  float: left;
+  color: black; /* #989871;*/
+  font-size: 1.5em;
+}
+#condition {
+  padding-top: 15px;
+  margin-left: -50px;
+  clear: left;
+  float: left;
+  font-size: 0.9em;
+}
+.supporting_info {
+  margin-left: -50px;
+  clear: left;
+  float: left;
+  font-size: 0.9em;
+}
+#add-to-cart {
+  float: right;
+  padding-top: 20px;
+  padding-right: 80px;
+  text-align: right;
+  padding-bottom: 20px;
+}
+#details {
+  padding-left: 20px;
+}
+#details p b {
+  /*color: #989871;*/
+}
+.padprod {
+  padding-top: 30px;
+}
+#fb_like_btn {
+  padding-top: 24px;
+  margin-left: -50px;
+  clear: left;
+  float: left;
+}
+#about_fb_like {
+  padding-top: 10px;
+  margin-left: -50px;
+  clear: left;
+  float: left;
+  font-size: 10px;
+  width: 200px;
+}

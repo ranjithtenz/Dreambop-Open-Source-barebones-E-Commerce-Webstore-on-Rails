@@ -1,0 +1,39 @@
+Hi <%= @order.user.email %>
+
+Thank you for shopping with yourdomain.com. You will receive another email when we have your tracking number.
+
+YOUR ORDER
+Products you ordered
+<% @order.products.each do |product| %>
+  <%= product_url(product) %>
+  <%= product.title %>
+  <%= number_to_currency(product.price) %>
+
+<% end %>
+
+Order Number:
+59910<%=h @order.id.to_s %>
+Link To Your order receipt
+<%= order_url(@order) %>
+Subtotal:
+<%= number_to_currency(@order.subtotal) %>
+Shipping cost:
+<%=h number_to_currency(@order.shipping_cost) %>
+Tax cost:
+<%=h number_to_currency(@order.tax_cost) %>
+Total cost:
+<%=h number_to_currency(@order.total_cost) %>
+
+Shipping Address:
+<% if @order.status.include?('Paypal') %>
+  <% shipping_address = @order.shipping_address %>
+  <%= shipping_address.first_name %> <%= shipping_address.last_name %>
+  <%= shipping_address.address1 %>
+  <% unless shipping_address.address2.empty? %><%= shipping_address.address2 %><% end %>
+  <%= shipping_address.city %>, <%= shipping_address.state %> <%= shipping_address.zip %>
+<% else %>
+  <% shipping_address = @order.credit_card %>
+  <%= shipping_address.first_name %> <%= shipping_address.last_name %>
+  <%= shipping_address.address %>
+  <%= shipping_address.city %>, <%= shipping_address.state %> <%= shipping_address.zip %>
+<% end %>

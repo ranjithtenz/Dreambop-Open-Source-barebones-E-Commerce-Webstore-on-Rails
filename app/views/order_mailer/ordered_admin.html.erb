@@ -1,0 +1,63 @@
+The User <%= @order.user.email %>
+
+THE ORDER
+Products
+<% @order.products.each do |product| %>
+  <%= product_url(product) %>
+  <%= product.title %>
+  <%= number_to_currency(product.price) %>
+  Vendor: <%= product.ds_vendor.class %>
+  <%
+  sku = ''
+    case product.ds_vendor_type
+      when 'IngramMicroProduct'
+        sku = product.ds_vendor.ingram_sku
+      when 'DandhProduct'
+        sku = product.ds_vendor.dandh_item_number
+      when 'DsdiProduct'
+        sku = product.ds_vendor.sku
+    end
+  %>
+  Vendor SKU: <%= sku %>
+<% end %>
+
+Their Order Number:
+59910<%=h @order.id.to_s %>
+Link to order overview:
+<%= url_for(@order) %>
+Subtotal:
+<%= number_to_currency(@order.subtotal) %>
+Tax cost:
+<%=h number_to_currency(@order.tax_cost) %>
+Shipping cost:
+<%=h number_to_currency(@order.shipping_cost) %>
+Total cost:
+<%=h number_to_currency(@order.total_cost) %>
+
+<% if @order.status.include?('Paypal') %>
+  Shipping/Billing Address:
+  <% shipping_address = @order.shipping_address %>
+  <%= shipping_address.first_name %> <%= shipping_address.last_name %>
+  <%= shipping_address.address1 %>
+  <% unless shipping_address.address2.empty? %><%= shipping_address.address2 %><% end %>
+  <%= shipping_address.city %>, <%= shipping_address.state %> <%= shipping_address.zip %>
+<% else %>
+  Shipping Address:
+  <% shipping_address = @order.credit_card %>
+  <%= shipping_address.first_name %> <%= shipping_address.last_name %>
+  <%= shipping_address.address %>
+  <%= shipping_address.city %>, <%= shipping_address.state %> <%= shipping_address.zip %>
+  Proposed Shipping Address:
+  <% shipping_address = @order.shipping_address %>
+  <%= shipping_address.first_name %> <%= shipping_address.last_name %>
+  <%= shipping_address.address1 %>
+  <% unless shipping_address.address2.empty? %><%= shipping_address.address2 %><% end %>
+  <%= shipping_address.city %>, <%= shipping_address.state %> <%= shipping_address.zip %>
+<% end %>
+
+<%= root_path %>
+
+ORDER STATUS:
+<%= @order.status %>
+ORDER ID
+<%= @order.id.to_s %>

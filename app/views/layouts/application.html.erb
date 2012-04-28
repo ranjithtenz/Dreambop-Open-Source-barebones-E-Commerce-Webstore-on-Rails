@@ -1,0 +1,87 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>
+  <%= yield :page_title %>
+  </title>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <%= yield :page_meta %>
+
+  <%= stylesheet_link_tag 'all-pages', 'jqdialog' %>
+  <%= yield :page_stylesheet %>
+  <link rel="stylesheet" media="screen and min-device-pixel-ratio: 0" href="/stylesheets/safari3.css"/>
+
+  <%= javascript_include_tag "cufon-yui.js", "Agency_FB_400.font.js", "Cornerstone_500.font.js", "jquery-1.4.4.min.js", "jquery.corners.min.js", "jqdialog.min.js" %>
+  <script type="text/javascript">
+      Cufon.replace('.top-link', { hover: true, fontFamily: 'Cornerstone' });
+      Cufon.replace('.menu-link', { hover: true, fontFamily: 'Cornerstone' });
+      Cufon.replace('.section-footer', { hover: true, fontFamily: 'Cornerstone' });
+      Cufon.replace('.cornerstone', { hover: true, fontFamily: 'Cornerstone' });
+      Cufon.replace('.section', { fontFamily: 'Agency FB' });
+  </script>
+  <%= yield :page_js %>
+
+  <% if RAILS_ENV == 'production' %>
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-19218507-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+  <% end %>
+</head>
+<body>
+  <div id="content-wrapper">
+    <div id="body-content">
+      <div id="top-grad"> &nbsp; </div>
+      <div id="top-menu">
+        <div id="logo-container">
+          <a href="/"><div id="logo-image"></div></a>
+        </div>
+        <div id="top-links">
+          <div class="top-link"><%= link_to 'About Us', {:action => :index, :controller => :about} %></div>
+          <div class="top-link-divider"></div>
+          <div class="top-link"><%= link_to 'Contact Us', {:action => :contact, :controller => :about } %></div>
+          <div class="top-link-divider"></div>
+          <div class="top-link"><%= link_to 'Policies', {:action => :policies, :controller => :about} %></div>
+        </div>
+        <div id="top-search">
+          <%= form_for :search, :url => search_post_path, :id => 'search_form' do |f| %>
+            <%= text_field '', :id, :value => @terms, :id => 'search_text' %>
+          <% end %> 
+        </div>
+      </div>
+      <div class="clear"></div>
+      <div id="menu-links">
+          <div class="menu-link">
+            <a href="/cart/show">cart</a>
+          </div>
+          <div class="menu-link">
+            <%= link_to 'browse', categories_sub_path('all') %>
+          </div>
+          <div class="menu-link">
+            <%= logged_in? ? link_to('my details', users_path) : link_to('my details', login_path)%> 
+          </div>
+      </div>
+      <div id="body-text">
+        <div id="notice-text">
+          <p class="error" ><%= flash[:error] %></p>
+          <p class="notice"><%= notice %></p>
+        </div>
+        <%= yield %>
+      </div>
+      <div class="clear bottom"></div>
+    </div>
+  </div>
+</body>
+</html>

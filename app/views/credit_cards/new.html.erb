@@ -1,0 +1,95 @@
+<% content_for :page_js do-%>
+<script type="text/javascript">
+  $(document).ready(function(){ 
+    if( $('#phone_number').val() == '5305148831') {
+      $('#phone_number').val('');
+    }
+      
+    $('.rounded').corners();
+    $('#decided').click(function(){
+      $('#decision_form').submit();
+    });
+  });
+
+</script>
+<% end %>
+<div class="section">PERSONAL INFORMATION</div>
+By using a credit card we can only ship to your billing address.
+<div id="entry-form">
+
+  <%= form_for :personal_info, :url => credit_card_path do |f| %>
+    <% if @user and @user.errors.any? %>
+      <% @user.errors.full_messages.each do |msg| %>  
+        <%= msg %><br>
+      <% end %>  
+    <% end %>  
+    <% if @credit_card.errors.any? %>
+      <% @credit_card.errors.full_messages.each do |msg| %>  
+        <%= msg %><br>
+      <% end %>  
+    <% end %>  
+
+    <% if current_user.nil? %>
+    <p>
+      <%= f.label :your_email %><br />
+      <%= text_field :user, :email %>
+    </p>
+    <p>
+      <%= f.label :choose_a_password %><br />
+      <%= password_field :user, :password %>
+    </p>
+    <% end %>
+    <p>
+      <%= f.label :contact_phone_number %><br />
+      <%= text_field :credit_card, :phone_number, :id => 'phone_number' %>
+    </p>
+    <p>
+      <%= f.label :billing_address %><br />
+      <%= text_field :credit_card, :address %>
+    </p>
+    <p>
+      <%= f.label :billing_city %><br />
+      <%= text_field :credit_card, :city %>
+    </p>
+    <p>
+      <%= f.label :billing_state %><br />
+      <%= text_field :credit_card, :state %>
+    </p>
+    <p>
+      <%= f.label :billing_zip %><br />
+      <%= text_field :credit_card, :zip %>
+    </p>
+    <p>
+      <%= f.label :credit_card_first_name %><br />
+      <%= text_field :credit_card, :first_name %>
+    </p>
+    <p>
+      <%= f.label :credit_card_last_name %><br />
+      <%= text_field :credit_card, :last_name %>
+    </p>
+    <p>
+      <%= f.label :credit_card_number %><br />
+      <%= text_field :credit_card, :number %>
+    </p>
+    <p>
+      <%= f.label :month %><br />
+      <%= select_month @credit_card.month, :field_name => 'month', :prefix => 'credit_card'  %>
+    </p>
+    <p>
+      <%= f.label :year %><br />
+      <%= select_year(@credit_card.year, :start_year => Date.today.year, :end_year => Date.today.year + 10, :field_name => 'year', :prefix => 'credit_card') %>
+
+    </p>
+    <p>
+      <%= f.label :card_verification_value %><br />
+      <%= text_field :credit_card, :verification_value %>
+    </p>
+    <div id="entry-form-submit">
+      <p>
+        <%= f.submit 'Create', :type => 'image', :src => '/images/button_submit.jpg' %>
+      </p>
+    </div>
+  <% end %>
+
+  <%= link_to 'Back', :action => :decision_prompt, :controller => :credit_cards %>
+</div>

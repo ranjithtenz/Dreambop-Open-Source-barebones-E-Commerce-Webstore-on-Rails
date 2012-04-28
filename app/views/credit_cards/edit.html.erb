@@ -1,0 +1,66 @@
+<div class="section">YOUR CREDIT CARD</div>
+<div id="entry-form">
+By using a credit card we can only ship to your billing address.
+
+<%= form_for(@credit_card, :url => credit_card_path, :method => :put) do |f| %>
+   <% if @credit_card.errors.any? %>
+     <% @credit_card.errors.full_messages.each do |msg| %>  
+         <%= msg %><br>
+       <% end %>  
+   <% end %>  
+
+  <p>
+    <%= f.label :contact_phone_number %><br />
+    <%= f.text_field :phone_number %>
+  </p>
+  <p>
+    <%= f.label :billing_address %><br />
+    <%= f.text_field :address %>
+  </p>
+  <p>
+    <%= f.label :billing_city %><br />
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :billing_state %><br />
+    <%= f.text_field :state %>
+  </p>
+  <p>
+    <%= f.label :billing_zip %><br />
+    <%= f.text_field :zip %>
+  </p>
+  <p>
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <%= f.label :card_number %><br />
+    <%= f.text_field :number %>
+  </p>
+  <p>
+    <%= f.label :month %><br />
+    <%= select_month(@credit_card.month) %>
+  </p>
+  <p>
+    <%= f.label :year %><br />
+    <%= select_year(@credit_card.year, :start_year => Date.today.year, :end_year => Date.today.year + 10) %>
+  </p>
+  <p>
+    <%= f.label :verification_value %><br />
+    <%= f.text_field :verification_value %>
+  </p>
+  <div id="entry-form-submit">
+    <p>
+      <%= f.submit 'Update', :src => '/images/button_submit.jpg', :type => 'image' %>
+    </p>
+  </div>
+<% end %>
+
+<% if @cart.cart_products.count > 0 %>
+<%= link_to 'Back to cart', "/cart/show" %>
+<% end %>
+</div>

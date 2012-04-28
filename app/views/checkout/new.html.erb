@@ -1,0 +1,101 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'cart' %>
+<% end %>
+<div class="section">CONFIRM YOUR ORDER</div>
+<% if session[:payment_method] == 'card' %>
+  <h3>By clicking checkout you agree to the policies page, and your credit card will be charged for the following products</h3>
+<% else %>
+  <h3>By clicking checkout you agree with the policies page, and you will be redirected to the paypal website</h3>
+<% end %>
+<table id="order_details">
+  <tr>
+    <td><b>Shipping Address</b></td>
+    <td><b>Payment Info</b></td>
+  </tr>
+  <tr>
+    <td>
+      <% if session[:payment_method] == 'card' %>
+        Currently we can only ship to <br/> your billing address.<br/><br/>
+        <%= @credit_card.first_name %> <%= @credit_card.last_name %><br/>
+        <%= @credit_card.address %><br/>
+        <%= @credit_card.city %>, <%= @credit_card.state %> <%= @credit_card.zip %><br/>
+        <%= link_to 'Edit shipping details', edit_credit_card_path %>
+      <% else %>
+      <%= @shipping_address.first_name %> <%= @shipping_address.last_name %><br/>
+        <%= @shipping_address.address1 %><br/>
+        <% unless @shipping_address.address2.empty? %> <%= @shipping_address.address2 %><br/> <% end %>
+        <%= @shipping_address.city %>, <%= @shipping_address.state %> <%= @shipping_address.zip %><br/>
+        <%= link_to 'Edit shipping details', shipping_addresses_path %>
+      <% end %>
+    </td>
+    <td>
+      <% if session[:payment_method] == 'card' %>
+        <%= @credit_card.first_name %> <%= @credit_card.last_name %><br/>
+        <%= @credit_card.display_number %><br/>
+        <%= @credit_card.month%>/<%= @credit_card.year %><br/>
+        <%= @credit_card.verification_value %><br/>
+        <%= link_to 'Edit Credit Card Details', edit_credit_card_path %><br/>
+        <%= link_to 'Change payment method', :controller => 'credit_cards', :action => :decision_prompt %>
+      <% else %>
+        Paypal Express Checkout<br/>
+        <img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_37x23.gif" align="left" style="margin-right:7px;"><span style="font-size:11px; font-family: Arial, Verdana;">The safer, easier way to pay.</span><br/><br/>
+        <%= link_to 'Edit', :controller => 'credit_cards', :action => :decision_prompt %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+<br/>
+<br/>
+<table id="checkout">
+  <tr>
+    <th>Product</th>
+    <th>Description</th>
+    <th>Price</th>
+  </tr>
+
+<% @products.each do |product| 
+%>
+  <tr class="<%=cycle('odd', 'even') %>">
+    <td class="item_pic"><%= link_to(image_tag(product.image(75), :width => 75, :height => 75), product) %></td>
+    <td><%= link_to(truncate(product.title, :length => 49), product) %></td>
+    <td><%= number_to_currency(product.price) %></td>
+  </tr>
+<% end %>
+<% if @checkout %>
+  <tr class="even">
+    <td>&nbsp;</td>
+    <td>Subtotal:</td>
+    <td><%= number_to_currency(@checkout.subtotal) %></td>
+  </tr>
+  <tr class="even">
+    <td>&nbsp;</td>
+    <td>Shipping:</td>
+    <td><%= number_to_currency(@checkout.shipping_cost) %></td>
+  </tr>
+  <tr class="even">
+    <td>&nbsp;</td>
+    <td>Tax:</td>
+    <td><%= number_to_currency(@checkout.tax) %></td>
+  </tr>
+  <tr class="even">
+    <td>&nbsp;</td>
+    <td>Total:</td>
+    <td><b><%= number_to_currency(@checkout.total) %></b></td>
+  </tr>
+  <tr class="even">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><br/>
+      <% if session[:payment_method] == 'card' %>
+        <%= form_for 'order', :url => orders_path do |f| %>
+          <%= submit_tag 'submit', :src => '/images/button_checkout.jpg', :type => :image %> 
+        <% end %>
+      <% else %>
+        <%= form_for 'order', :url => paypal_orders_path do |f| %>
+          <%= submit_tag 'submit', :src => 'https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif', :type => :image %> 
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+  <% end %>
+</table>

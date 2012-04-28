@@ -1,0 +1,56 @@
+<h1>Editing product</h1>
+
+<%= form_for(@product) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :sku %><br />
+    <%= f.text_field :sku %>
+  </p>
+  <p>
+    <%= f.label :image %><br />
+    <%= f.text_field :image %>
+  </p>
+  <p>
+    <%= f.label :manufacturer %><br />
+    <%= f.text_field :manufacturer %>
+  </p>
+  <p>
+    <%= f.label :model %><br />
+    <%= f.text_field :model %>
+  </p>
+  <p>
+    <%= f.label :quantity %><br />
+    <%= f.text_field :quantity %>
+  </p>
+  <p>
+    <%= f.label :reseller_price %><br />
+    <%= f.text_field :reseller_price %>
+  </p>
+  <p>
+    <%= f.label :msrp %><br />
+    <%= f.text_field :msrp %>
+  </p>
+  <p>
+    <%= f.label :weight %><br />
+    <%= f.text_field :weight %>
+  </p>
+  <p>
+    <%= f.label :notes %><br />
+    <%= f.text_field :notes %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @product %> |
+<%= link_to 'Back', products_path %>

@@ -1,0 +1,84 @@
+/*body {
+	margin: 0px;
+	background: #ececec;
+	background-position: top center;
+	font-family: Arial;
+	font-size: 11px;
+	color: #666;
+}
+		
+#main {
+	background: #fff;
+	margin: 30px;
+	padding: 20px;
+}
+
+.o {
+	margin: 50px 0px 100px 0px;
+}
+
+a {
+	color: #cc0000;
+}
+*/
+
+#main {
+	background: #fff;
+	margin: 30px;
+	padding: 20px;
+}
+
+.o {
+	margin: 50px 0px 100px 0px;
+}
+
+
+#jqDialog_box {
+	background: #eee;
+	position: absolute;
+	width: 450px;
+	height: 150px;
+	font-family: Arial;
+	
+	border-width: 3px 1px 1px 1px;
+	border-style: solid;
+	border-color: #ccc;
+
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+}
+#jqDialog_content {
+	margin: 10px;
+	font-weight: bold;
+	font-size: 12px;
+	height: 90px;
+	overflow: hidden;
+}
+
+#jqDialog_options {
+	margin: 10px;
+	text-align: center;
+}
+#jqDialog_options button {
+	font-family: Arial;
+	margin-right: 5px;
+	background: #666;
+	border: 0px;
+
+	font-size: 1.5em;
+	color: #fff;
+	width: auto;
+}
+
+#jqDialog_input {
+	padding: 4px;
+	width: 250px;
+}
+#jqDialog_close {
+	background: none;
+	border: none;
+	float: right;
+	font-weight: bold;
+	font-size: 10px;
+	color: #cc0000;
+}

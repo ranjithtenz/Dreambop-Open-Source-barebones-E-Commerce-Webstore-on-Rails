@@ -1,0 +1,32 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'login' %>
+<% end %>
+<% content_for :page_title do -%>
+  Login to dreambop and order great new products
+<% end %>
+<% content_for :page_meta do -%>
+  <meta name="title" content="dreambop.com: Excellent new products and unbeatable service" />
+  <meta name="description" content="dreambop.com: Excellent new products and unbeatable service" />
+  <meta name="keywords" content="fantastic online experience with superior information in an enjoyable way." />
+<% end %>
+<div class="section">LOG IN</div>
+<div id="entry-form">
+  <% form_tag session_path do -%>
+  <p><%= label_tag 'email' %><br />
+  <%= text_field_tag 'email', @email %></p>
+
+  <p><%= label_tag 'password' %><br/>
+  <%= password_field_tag 'password', nil %></p>
+
+  <!-- Uncomment this if you want this functionality
+  <p><%= label_tag 'remember_me', 'Remember me' %>
+  <%= check_box_tag 'remember_me', '1', @remember_me %></p>
+  -->
+
+  <div id="login_btn_pos">
+    <p><%= submit_tag 'LOG IN', :src => '/images/button_login.jpg', :type => 'image' %></p>
+  </div>
+  <p><%= link_to "I'm new, sign me up", new_user_path %></p>
+  <p><%= link_to "I forgot my password", reset_password_path %></p>
+  <% end -%>
+</div>

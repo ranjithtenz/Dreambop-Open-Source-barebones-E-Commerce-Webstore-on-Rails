@@ -1,0 +1,11 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'multi-prod' %>
+<% end %>
+<% content_for :page_title do -%>
+  <%= @section_title %>
+<% end %>
+<div class="section"><%= @section_title %></div>
+<%= render :partial => 'locals/products', :locals => {:products => @products } %>
+<div id="page_links">
+  <%= will_paginate %>
+</div>

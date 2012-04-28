@@ -1,0 +1,36 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'multi-prod' %>
+<% end %>
+<% content_for :page_title do -%>
+  <%= @count %> results for <%= @terms %>
+<% end %>
+<% content_for :page_meta do -%>
+  <meta name="title" content="dreambop.com: Search for <%= @terms %>" />
+  <meta name="description" content="dreambop.com: results for <%= @terms %>" />
+  <meta name="keywords" content="<%= @terms %>" />
+<% end %>
+<div class="section">SEARCH</div>
+<h3 style="padding-left: 20px;"><%= @count %> results for '<%= @terms %>'</h3>
+<div class="products-container">
+<% @products.each do |product| %>
+  <div class="product">
+    <div class="small_img">
+      <%= link_to(image_tag(product.image(150), :width => 150, :height => 150), product) %>
+    </div>
+    <div class="product-title">
+      <%= link_to( truncate(product.title, {:length => 49}), product) %>
+    </div>
+    <div class="product-price">
+      <%= link_to( number_to_currency(product.price), product) %>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<div class="clear">
+</div>
+
+<div id="page_links">
+  <%= will_paginate @products %>
+</div>
+

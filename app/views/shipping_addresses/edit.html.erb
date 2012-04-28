@@ -1,0 +1,42 @@
+<div class="section">EDIT YOUR SHIPPING ADDRESS</div>
+<div id="entry-form">
+  <%= form_for(@shipping_address) do |f| %>
+    <%= f.error_messages %>
+
+    <p>
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name %>
+    </p>
+    <p>
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name %>
+    </p>
+    <p>
+      <%= f.label :address %><br />
+      <%= f.text_field :address1 %>
+    </p>
+    <p>
+      <%= f.label 'Address Suite/Apt' %><br />
+      <%= f.text_field :address2 %>
+    </p>
+    <p>
+      <%= f.label :city %><br />
+      <%= f.text_field :city %>
+    </p>
+    <p>
+      <%= f.label :state %><br />
+      <%= state_select(:shipping_address, :state) %>
+    </p>
+    <p>
+      <%= f.label :zip %><br />
+      <%= f.text_field :zip %>
+    </p>
+    <div id="entry-form-submit">
+      <p>
+        <%= f.submit 'Update', :src => '/images/button_submit.jpg', :type => 'image' %>
+      </p>
+    </div>
+  <% end %>
+
+  <%= link_to 'Back', shipping_addresses_path %>
+</div>

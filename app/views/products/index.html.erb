@@ -1,0 +1,35 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'multi-prod' %>
+<% end %>
+<% content_for :page_title do -%>
+  Featured Products, Top Sellers, Recommended, and New items
+<% end %>
+<% content_for :page_meta do -%>
+  <meta name="title" content="dreambop.com: Excellent new products and unbeatable service" />
+  <meta name="description" content="dreambop.com: Excellent new products and unbeatable service" />
+  <meta name="keywords" content="fantastic online experience with superior information in an enjoyable way." />
+<% end %>
+<div class="section">FEATURED PRODUCTS</div>
+<%= render :partial => 'locals/products', :locals => {:products => @featured_products} %>
+<div class="section-footer">
+  <%= link_to 'See more featured products . . .', featured_path %>
+</div>
+
+<div class="section">TOP SELLERS</div>
+<%= render :partial => 'locals/products', :locals => {:products => @top_sellers } %>
+<div class="section-footer">
+  <%= link_to 'See more top sellers . . .', top_sellers_path %>
+</div>
+
+<div class="section">RECOMMENDED</div>
+<%= render :partial => 'locals/products', :locals => {:products => @recommended } %>
+<div class="section-footer">
+  <%= link_to 'See more recommended products . . .', recommended_path %>
+</div>
+
+<div class="section">NEW PRODUCTS</div>
+<%= render :partial => 'locals/products', :locals => {:products => @new_products} %>
+<div class="section-footer">
+  <%= link_to 'See more new products . . .', new_path %>
+</div>
+

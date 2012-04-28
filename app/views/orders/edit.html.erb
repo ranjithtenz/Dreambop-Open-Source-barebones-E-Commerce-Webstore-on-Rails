@@ -1,0 +1,40 @@
+<h1>Editing order</h1>
+
+<%= form_for(@order) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :shipping_address_id %><br />
+    <%= f.text_field :shipping_address_id %>
+  </p>
+  <p>
+    <%= f.label :credit_card_id %><br />
+    <%= f.text_field :credit_card_id %>
+  </p>
+  <p>
+    <%= f.label :tax_cost %><br />
+    <%= f.text_field :tax_cost %>
+  </p>
+  <p>
+    <%= f.label :shipping_cost %><br />
+    <%= f.text_field :shipping_cost %>
+  </p>
+  <p>
+    <%= f.label :subtotal %><br />
+    <%= f.text_field :subtotal %>
+  </p>
+  <p>
+    <%= f.label :total_cost %><br />
+    <%= f.text_field :total_cost %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @order %> |
+<%= link_to 'Back', orders_path %>

@@ -1,0 +1,118 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'product', 'categories', 'multi-prod' %>
+<% end %>
+
+<% content_for :page_js do-%>
+<script type="text/javascript">
+        $(document).ready(function(){ 
+          $('#saved').click( function() { jqDialog.notify("You could <%= @product.saved_comp %> for that.", 3); return false; } );
+          FB.Event.subscribe('edge.create', function(response) {
+            //alert('page liked');
+            // do something with response.session
+          });
+          FB.Event.subscribe('comments.add', function(response) {
+            //alert('page liked');
+            // do something with response.session
+          });
+        });
+        $(window).load(function(){ 
+        });
+</script>
+<% end %>
+
+<% content_for :page_title do -%>
+  <%= @product.title %> : <%= number_to_currency(@product.price) %>
+<% end %>
+
+<% content_for :page_meta do -%>
+  <meta name="title" content="dreambop.com: <%= @product.title %>: <%= @product.category.display_name %>" />
+  <meta name="description" content="dreambop.com: <%= @product.category.display_name %> - <%= @product.description.gsub(%r{</?[^>]+?>}, '').gsub(/"/, '') %>" />
+  <meta name="keywords" content="<%= @product.title.to_s + ', ' + @product.manufacturer.to_s + ', ' + @product.description.gsub(%r{</?[^>]+?>}, '').gsub(/"/, '') %>" />
+  <!-- facebook page stuff -->
+  <meta property="og:title" content="<%= @product.title %>"/> 
+  <meta property="og:type" content="product"/> 
+  <meta property="og:image" content="<%= @product.image %>"/> 
+  <meta property="og:url" content="<%= product_url(@product) %>"/> 
+  <meta property="og:site_name" content="dreambop"/> 
+  <meta property="fb:admins" content="3614966"/>
+  <meta property="og:description" content="<%= @product.description.gsub(%r{</?[^>]+?>}, '').gsub(/"/, '') %>"/>
+<% end %>
+
+<div id="breadcrumb">
+  <%= render :partial => 'locals/breadcrumb', :locals => { :breadcrumb => @breadcrumb } %>
+</div>
+<div class="section">PRODUCT DESCRIPTION</div>
+<div id="picture">
+   <%= link_to(image_tag(@product.image(300), :style => 'max-width: 300px'), @product.image) %></td>
+</div>
+<div id="description">
+  <span class=""><b><%=h @product.title %></b></span>
+  <br/>
+  <span id="description-text" class=""><%= raw @product.description %></span>
+</div>
+<div class="clear"></div>
+<div id="price">
+  <div id="price-text"><%= number_to_currency(@product.price) %></div>
+  <div id="condition">Condition: New</div>
+  <% if @product.not_na? %>
+  <div class="supporting_info">In stock: <%= @product.display_availability %></div>
+  <% end %>
+  <% np = @product.msrp
+     if np <= 0 
+       np = "N/A"
+     else
+       np = number_to_currency(np)
+     end %>
+  <div class="supporting_info">Normal Price: <%= np %> </div>
+  <% saved = @product.msrp - @product.price %>
+  <% if saved > 0 %>
+  <div class="supporting_info">You save: <a href='#' id="saved"><%= number_to_currency(@product.msrp - @product.price) %></a></div>
+  <% end %>
+  <div id="fb_like_btn">
+     <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like font="verdana" ref="<%= @product.id.to_s %>" href="<%= product_url(@product) %>" show_faces="true" width="200"></fb:like>
+  </div>
+  <div id="about_fb_like">
+    Like this page and get money off your purchase. Read more about <%= link_to 'the dreambop facebook coupon', :action => 'facebook_coupon', :controller => 'about' %>
+  </div>
+  <div id="add-to-cart">
+    <%= form_for @product, :url => { :action => :update, :controller => :cart, :id => @product }, :method => :put do |f| %>
+      <%= submit_tag 'Add to cart', :src => '/images/button_add_to_cart.jpg', :type => 'image' %> 
+    <% end %>
+   </div>
+</div>
+<br/>
+<br/>
+<div class="clear"></div>
+<div class="section">DETAILS</div>
+<div id="details">
+  <% ds_prod = @product.ds_vendor %>
+  <% if ds_prod.class == DandhProduct %>
+  <p>
+    <b>MANUFACTURER URL</b>
+    <%= link_to ds_prod.manufacturer_url, 'http://' + ds_prod.manufacturer_url, :target => '_blank' %>
+  </p>
+  <p>
+    <b>WARRANTY LENGTH</b>
+    <%=h ds_prod.warranty_length %>
+  </p>
+  <p>
+    <b>OTHER TECH DETAILS</b>
+    <br/><%= raw ds_prod.tech_description %>
+  </p>
+  <% end %>
+  <p>
+    <a href="/manufacturers"><b>MANUFACTURER</b>:</a>
+    <%= link_to @product.manufacturer, :action => :show, :controller => :manufacturers, :id => @product.manufacturer.gsub(/ /, '+') %>
+  </p>
+
+  <p>
+    <b>WEIGHT:</b>
+    <%=h @product.weight %> lb(s).
+  </p>
+</div>
+<div class="padprod"></div>
+<div class="section">RELATED PRODUCTS</div>
+<%= render :partial => 'locals/products', :locals => {:products => @related_products} %>
+<div class="section-footer">
+  <%= link_to 'See more related products . . .', :action => :show, :controller => :manufacturers, :id => @product.manufacturer.gsub(/ /, '+') %>
+</div>

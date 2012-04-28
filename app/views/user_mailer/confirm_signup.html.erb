@@ -1,0 +1,5 @@
+Hi <%= @user.email %>
+
+Please click the link below to confirm your email address with us today.
+
+<%= url_for( :controller => :users, :action => :activate, :activation_code => @user.activation_code, :only_path => false) %>

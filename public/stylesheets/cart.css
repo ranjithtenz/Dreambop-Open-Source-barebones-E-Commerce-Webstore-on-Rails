@@ -1,0 +1,70 @@
+table#checkout {
+  border: 1px solid black;
+  border-color: #ffffe8;
+  width: 700px;
+}
+.item_pic {
+  text-align: center;
+  padding-right: 20px;
+}
+.row {
+  padding-top: 10px;
+}
+.item {
+  padding-top: 40px;
+  float:left;
+  padding-right: 20px;
+}
+.odd {
+  background-color: #ffffe8;
+}
+.even {
+  background-color: white;
+}
+#order_details {
+  padding-left: 20px;
+  width: 700px;
+}
+table#payment_method {
+  width: 100%;
+}
+#payment_method td {
+  padding: 0px 0px 0px 0px;
+}
+#decision {
+  padding-left: 250px;
+  width: 300px;
+}
+
+a.rounded, .button {
+  outline: none;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  vertical-align: middle; /* or top */
+  display: -moz-inline-box;
+  display: inline-block;
+  overflow: visible; /* IE6 form button fix */
+}
+.button {
+  color: #FFFFFF;
+  background-color: black;
+  padding: 5px 7px;
+}
+.button:hover {
+  background-color: black;
+  color: #FFFF6F;
+} 
+.details_btn {
+  padding: 10px 10px; 
+  color: white; 
+  background-color:#000000;
+  text-align: center;
+}
+.login_btn {
+  padding: 10px 20px; 
+  color: white; 
+  background-color:#000000;
+  max-width: 55px;
+}

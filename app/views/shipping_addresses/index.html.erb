@@ -1,0 +1,37 @@
+<div class="section">YOUR SHIPPING ADDRESS</div>
+<div class="main-body-content">
+
+  <% shipping_address = @shipping_addresses.first unless @shipping_addresses.empty? %>
+  <% unless shipping_address.nil? %>
+    <%= form_for(shipping_address, :url => { :action => :select_address, :controller => :checkout}) do |f| %>
+      <table>
+        <tr>
+          <th>Select address to ship to</th>
+        </tr>
+
+      <% @shipping_addresses.each do |shipping_address| %>
+        <tr>
+          <td><%= radio_button("shipping_address", "id", shipping_address.id) %></td>
+          <td><%=h shipping_address.first_name %> <%=h shipping_address.last_name %><br/>
+              <%=h shipping_address.address1 %><br/>
+              <% unless shipping_address.address2.empty? %> <%=h shipping_address.address2 %><br/><% end %>
+              <%=h shipping_address.city %>, <%=h shipping_address.state %> <%=h shipping_address.zip %><br/>
+              <!--<%= link_to 'Edit', edit_shipping_address_path(shipping_address) %>  | --> <%= link_to 'Remove', shipping_address, :confirm => 'Are you sure?', :method => :delete %>
+          </td>
+        </tr>
+      <% end %>
+        <tr>
+          <td> <%= link_to 'Add a New shipping address', new_shipping_address_path %> </td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><br/><br/><%= f.submit 'Select', :src => '/images/button_submit.jpg', :type => 'image' %> </td>
+        </tr>
+      </table>
+    <% end %>
+  <% end %>
+
+  <br />
+
+</div>

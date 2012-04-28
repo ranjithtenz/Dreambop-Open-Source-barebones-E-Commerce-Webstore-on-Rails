@@ -1,0 +1,50 @@
+<div class="section">YOUR CREDIT CARD</div>
+<div class="main-body-content">
+<table>
+  <tr>
+    <td>
+      <b>First name:</b>
+    </td>
+    <td>
+      <%=h @credit_card.first_name %>
+    </td>
+  </tr>
+    <td>
+      <b>Last name:</b>
+    </td>
+    <td>
+        <%=h @credit_card.last_name %>
+    </td>
+  </tr>
+  <tr>
+    <td><b>Card Number:</b></td>
+    <td><%=h @credit_card.display_number %></td>
+  </tr>
+  <tr>
+    <td>
+      <b>Month / Year:</b>
+    </td>
+    <td>
+      <%=h @credit_card.month %>/ <%=h @credit_card.year %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Verification value:</b>
+    </td>
+    <td>
+      <%=h @credit_card.verification_value %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= link_to 'Edit my credit card details', edit_credit_card_path %>
+    </td>
+    <td>
+      <% if @cart.cart_products.count > 0 %>
+        <%= link_to image_tag('/images/button_checkout.jpg'), shipping_addresses_path %>
+      <% end %>
+    </td>
+  </tr>
+</table>
+</div>

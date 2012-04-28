@@ -1,0 +1,13 @@
+<% i = 0 %>
+<% breadcrumb.reverse.each do |crumb| %>
+  <% #TODO cache this children call %>
+  <% unless crumb.children.empty? %>
+  <%= link_to crumb.display_name.upcase, categories_sub_path(crumb.name) %>
+  <% else %>
+  <span class=""><%= crumb.display_name.upcase %></span>
+  <% end %>
+  <% unless breadcrumb.size - 1 == i %>
+    &gt;
+  <% end %>
+  <% i = i + 1 %>
+<% end %>

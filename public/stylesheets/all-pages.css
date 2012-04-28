@@ -1,0 +1,166 @@
+html {
+  background-color: white;
+  background-image:url('/images/background-pattern.png');
+  background-repeat: repeat;
+}
+body {
+  text-align: center;
+  background-repeat: no-repeat;
+  font-family: "Helvetica", sans-serif;
+  color: #504f4f;
+}
+a, a:visited {
+  /*color: #989871; */
+  color: #98988c;
+  text-decoration: none;
+}
+a:hover {
+  color: #504f4f;
+}
+#content-wrapper {
+  min-height: 1200px;
+  min-width: 825px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40em;
+  
+  text-align: center;
+}
+#body-content {
+  text-align: left;
+  margin-top: -21px;
+  min-width: 800px;
+  min-height: 850px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  border: 3px solid black;
+}
+#top-grad {
+  margin-top: 10px;
+  min-width: 775px;
+  min-height: 7px;
+  background-image:url('/images/top-grad.png');
+  background-repeat: repeat-x;
+}
+#top-menu {
+  margin-top: -17px;
+}
+#logo-container {
+  float: left;
+  margin-left: 7px;
+}
+#logo-image {
+  background-image:url('/images/db-logo.png');
+  background-repeat: repeat-x;
+  width: 205px;
+  height: 77px;
+}
+#top-links{
+  color: #98988c;
+  float: left;
+  min-width: 251px;
+  min-height: 20px;
+  padding: 11px 0px 0px 55px;
+}
+.top-link {
+  padding-left: 15px;
+  padding-right: 15px;
+  float: left;
+  text-transform: uppercase;
+  font-size: .5em;
+  letter-spacing: .05em;
+}
+.top-link-divider {
+  margin-top: -2px;
+  background-image: url('/images/top-divider.png');
+  background-repeat: no-repeat;
+  width: 1px;
+  height: 14px;
+  float: left;
+}
+#top-search{
+  float: left;
+  padding-top: 5px;
+  padding-left: 35px;
+}
+#body-text {
+  min-height: 758px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 13px;
+}
+#menu-links {
+  position: relative;
+  top: -12px;
+  left: 370px;
+}
+.menu-link {
+  padding-right: 68px;
+  float: left;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  letter-spacing: 0.2em;
+}
+/*div#search form input.text { */
+#search_text {
+  background: url("/images/eyeglass.png") no-repeat scroll 1px 2px #f0f0f0;
+  padding: 0px 5px 0 20px; 
+}
+.section {
+  background: url("/images/section-header-block.png") repeat-x 0px 28px;
+  padding-left: 1px;
+  padding-bottom: 0px;
+  min-width: 725px;
+  min-height: 35px;
+  color: #504f4f;
+  text-transform: uppercase;
+  font-size: 1.6em;
+  letter-spacing: .02em;
+}
+.clear {
+  clear: both;
+}
+.main-body-content {
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 10px;
+  font-size: 0.85em;
+  line-height: 1.5em;
+}
+a img, a:hover img {
+  color: white;
+}
+.small_img {
+  height: 150px;
+  width: 150px;
+}
+#notice-text {
+  text-align: center;
+}
+.notice, .error {
+  color: black;
+}
+form p {
+  font-size: 0.9em;
+  font-weight: bold;
+}
+#entry-form {
+  padding-left: 200px;
+}
+#entry-form-submit {
+  padding-left: 180px;
+}
+input[type='text'], input[type='password'] {
+  color: #504f4f;
+  height: 1.6em;
+  width: 184px;
+  border-style: none;
+  border: 1px solid black;
+  background-repeat: none;
+  background-color: #f0f0f0;
+  font-size: 0.7em;
+}
+.bottom {
+  padding-top: 14px;
+}

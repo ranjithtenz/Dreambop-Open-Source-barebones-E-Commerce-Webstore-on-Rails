@@ -1,0 +1,38 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'categories' %>
+<% end %>
+<% content_for :page_title do -%>
+  Sub-Categories for: <%= @category.display_name %>
+<% end %>
+<div id="breadcrumb">
+  <% i = 0 %>
+  <% @breadcrumb.reverse.each do |crumb| %>
+    <% unless crumb.children.empty? %>
+    <%= link_to crumb.display_name.upcase, categories_path(crumb.name) %>
+    <% else %>
+    <%= crumb.display_name.upcase %>
+    <% end %>
+    <% unless @breadcrumb.size - 1 == i %>
+      &gt;
+    <% end %>
+    <% i = i + 1 %>
+  <% end %>
+</div>
+<div class="section">Sub-Categorires for : <%= link_to(@category.display_name.upcase, categories_path(@category.name)) %></div>
+<% i = 0 %>
+<% total = @categories.size %>
+<% @categories.each do |category| %>
+  <% if i == 0 or i % 20 == 0 %>
+    <div class="categories">
+  <% end %>
+      <span class="category">
+        <%= link_to category.display_name, categories_path(category.linkify) %>
+      </span>
+      <br/>
+  <% if i % 20 == 19 or (i == total - 1) %>
+    </div>
+  <% end %>
+  <% i = i + 1 %>
+<% end %>
+<div class="clear">
+</div>

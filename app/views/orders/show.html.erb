@@ -1,0 +1,74 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'cart' %>
+<% end %>
+<div class="section">YOUR ORDER</div>
+<div class="main-body-content" style="padding-left: 40px;">
+<h3>Please <a href="javascript:window.print();">print</a> this page for your records</h3>
+  <table>
+  <tr>
+    <td>
+      <b>Order Number:</b>
+    </td>
+    <td>
+      59910<%=h @order.id.to_s %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Subtotal:</b>
+    </td>
+    <td>
+      <%= number_to_currency(@order.subtotal) %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Shipping cost:</b>
+    </td>
+    <td>
+      <%=h number_to_currency(@order.shipping_cost) %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <b>Tax cost:</b>
+    </td>
+    <td>
+      <%=h number_to_currency(@order.tax_cost) %>
+    </td>
+  </tr>
+
+
+  <tr>
+    <td>
+      <b>Total cost:</b>
+    </td>
+    <td>
+      <%=h number_to_currency(@order.total_cost) %>
+    </td>
+  </tr>
+
+  </table>
+  <br/>
+  <table id="checkout">
+    <tr>
+      <th>Product</th>
+      <th>Description</th>
+      <th>Price</th>
+    </tr>
+
+  <% @products.each do |product| 
+  %>
+    <tr class="<%=cycle('odd', 'even') %>">
+      <td class="item_pic"><%= link_to(image_tag(product.image(75), :width => 75, :height => 75), product) %></td>
+      <td><%= link_to(truncate(product.title, :length => 49), product) %></td>
+      <td><%= number_to_currency(product.price) %></td>
+    </tr>
+  <% end %>
+  </table>
+  <br/>
+  <br/>
+  <br/>
+  <%= link_to 'Back to shopping', products_path %>
+</div>
