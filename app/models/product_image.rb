@@ -17,8 +17,8 @@ class ProductImage < ActiveRecord::Base
 
   def create_thumbs!
     AWS::S3::Base.establish_connection!(
-      :access_key_id     => '1KGQM1R0G4E04Q11EE82',
-      :secret_access_key => '8Qw1pJ59kgjxvIBPOfMizRDT1Z0KgGKPfvqpXLNU'
+      :access_key_id     => 'FF00FFUUFFUUFFUUFUU00',
+      :secret_access_key => '7373784848477383847748847'
     )
     self.content_type = content_type = self.content_type.downcase
     new_file_name = self.filename + '-x' + self.width.to_s + self.content_type
