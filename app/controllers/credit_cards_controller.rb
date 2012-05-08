@@ -73,7 +73,7 @@ class CreditCardsController < ApplicationController
         user = User.authenticate(params[:user][:email], params[:user][:password])
         self.current_user = user 
         new_cookie_flag = true #old (params[:remember_me] == "1")
-        handle_remember_cookie! new_cookie_flag
+        #handle_remember_cookie! new_cookie_flag
         shipping_address = ShippingAddress.find_by_session_id(request.session_options[:id])
         cart = Cart.find_by_session_id(request.session_options[:id])
         cart.user = current_user

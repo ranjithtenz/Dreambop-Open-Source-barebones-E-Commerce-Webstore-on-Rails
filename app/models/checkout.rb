@@ -91,10 +91,10 @@ private
         ]
 
 
-        ups = UPS.new(:login => 'thedude', :password => 'whiterussian', :key => '0404040404040404')
-        response = ups.find_rates(origin, destination, packages)
-        ups_rates = response.rates.sort_by(&:price).collect {|rate| [rate.service_name, rate.price]}
-        total_ship_cost += (ups_rates.first[1] / 100) + 5
+        #ups = UPS.new(:login => 'thedude', :password => 'whiterussian', :key => '0404040404040404')
+        #response = ups.find_rates(origin, destination, packages)
+        #ups_rates = response.rates.sort_by(&:price).collect {|rate| [rate.service_name, rate.price]}
+        #total_ship_cost += (ups_rates.first[1] / 100) + 5
       else
         total_ship_cost = 0
       end

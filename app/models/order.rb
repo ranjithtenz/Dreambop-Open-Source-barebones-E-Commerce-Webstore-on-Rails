@@ -11,13 +11,19 @@ class Order < ActiveRecord::Base
   validates_presence_of :tax_cost, :shipping_cost, :subtotal, :total_cost, :user_id, :shipping_address_id #, :credit_card_id
   validates_numericality_of :tax_cost, :shipping_cost, :subtotal, :total_cost
 
-  before_validation_on_create :load_checkout_totals, :set_user_details
-  after_validation_on_create  :submit_to_gateway
+  before_validation(:on => :create) do 
+    load_checkout_totals
+    set_user_details
+  end
+  after_validation(:on => :create) do 
+    submit_to_gateway
+  end
+
   after_create :add_ordered_products, :reset_cart, :email_users
 
   def email_users 
-    OrderMailer.deliver_ordered(self) 
-    OrderMailer.deliver_ordered_admin(self) 
+    #OrderMailer.deliver_ordered(self) 
+    #OrderMailer.deliver_ordered_admin(self) 
   end
 
   def cancel
@@ -64,23 +70,23 @@ class Order < ActiveRecord::Base
     #  :login    => '838383',  
     #  :password => '9383838'
     #)
-    gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new(
-      :login    => '9vLbG97Lfg8',  
-      :password => '98g9574fkLeBmT8j',
-      :test => test
-    )
+    #gateway = ActiveMerchant::Billing::AuthorizeNetGateway.new(
+    #  :login    => '9vLbG97Lfg8',  
+    #  :password => '98g9574fkLeBmT8j',
+    #  :test => test
+    #)
     gateway_total = (self.total_cost * 100).to_i
     #add this shit later
     #shipping_address = {:first_name => 'ANITA', :last_name => 'GANS', :address1 => '8812 NORTH 114TH AVE', :city => 'PEORIA', :zip => '85345', :state => 'AZ'}
     #response = gateway.authorize(gateway_total, credit_card, :billing_address => shipping_address)
     billing_address = { :address => self.credit_card.address, :city => self.credit_card.city, :state => self.credit_card.state, :zip => self.credit_card.zip, :country => 'US', :phone => self.credit_card.phone_number}
-    response = gateway.authorize(gateway_total, am_credit_card, {:billing_address => billing_address})
-    if response.success?
-      gateway.capture(gateway_total, response.authorization)
+    #response = gateway.authorize(gateway_total, am_credit_card, {:billing_address => billing_address})
+    if true #response.success?
+      #gateway.capture(gateway_total, response.authorization)
       self.status = STATUSES[1]
-      self.transaction_number = response.authorization.to_s
+      self.transaction_number = "not capturing auth here" #response.authorization.to_s
     else
-      self.status = STATUSES[0] + ': ' + response.message
+      #self.status = STATUSES[0] + ': ' + response.message
       errors.add(:base, 'We are sorry but your credit card could not be charged for some reason. Please contact us if this problem persists')
       #raise StandardError, response.message 
     end

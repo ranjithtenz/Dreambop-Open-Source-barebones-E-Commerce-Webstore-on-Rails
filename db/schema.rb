@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -15,16 +16,16 @@ ActiveRecord::Schema.define(:version => 20110128071513) do
   create_table "cart_products", :force => true do |t|
     t.integer  "cart_id",    :null => false
     t.integer  "product_id", :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "cart_products", ["cart_id"], :name => "index_cart_products_on_cart_id"
 
   create_table "carts", :force => true do |t|
     t.integer  "user_id",                    :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.string   "session_id", :default => ""
   end
 
@@ -33,8 +34,8 @@ ActiveRecord::Schema.define(:version => 20110128071513) do
   create_table "categories", :force => true do |t|
     t.string   "name",       :default => "", :null => false
     t.integer  "parent_id",  :default => 0,  :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
   end
 
   add_index "categories", ["name", "parent_id"], :name => "index_categories_on_name_and_parent_id"
@@ -48,8 +49,8 @@ ActiveRecord::Schema.define(:version => 20110128071513) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "verification_value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.string   "phone_number",       :default => "5305148831"
     t.string   "address",            :default => ""
     t.string   "city",               :default => ""
@@ -76,8 +77,8 @@ ActiveRecord::Schema.define(:version => 20110128071513) do
     t.string   "vendor_name",           :default => ""
     t.string   "category",              :default => ""
     t.string   "subcategory",           :default => ""
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "dsdi_products", :force => true do |t|
@@ -139,8 +140,8 @@ ActiveRecord::Schema.define(:version => 20110128071513) do
     t.string   "new_item_receipt_flag",     :default => ""
     t.string   "instant_rebate_flag",       :default => ""
     t.string   "restricted_flag",           :default => ""
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   add_index "ingram_micro_products", ["ingram_sku"], :name => "index_ingram_micro_products_on_ingram_sku", :unique => true
@@ -149,8 +150,8 @@ ActiveRecord::Schema.define(:version => 20110128071513) do
   create_table "order_products", :force => true do |t|
     t.integer  "order_id"
     t.integer  "product_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "order_products", ["order_id"], :name => "index_order_products_on_order_id"
@@ -165,8 +166,8 @@ ActiveRecord::Schema.define(:version => 20110128071513) do
     t.float    "subtotal"
     t.float    "total_cost"
     t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "transaction_number",  :default => ""
     t.string   "tracking_number",     :default => ""
     t.string   "tracking_type",       :default => ""
@@ -182,8 +183,8 @@ ActiveRecord::Schema.define(:version => 20110128071513) do
     t.integer  "parent_id",    :default => 0
     t.boolean  "thumbnail"
     t.integer  "width"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
   end
 
   add_index "product_images", ["product_id", "parent_id"], :name => "index_product_images_on_product_id_and_parent_id"
@@ -197,8 +198,8 @@ ActiveRecord::Schema.define(:version => 20110128071513) do
     t.float    "reseller_price", :default => 0.0
     t.string   "manufacturer",   :default => ""
     t.float    "weight",         :default => 0.0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.float    "map",            :default => 0.0
     t.integer  "category_id",    :default => 0,    :null => false
     t.string   "upc_code",       :default => ""
@@ -207,16 +208,6 @@ ActiveRecord::Schema.define(:version => 20110128071513) do
 
   add_index "products", ["category_id"], :name => "index_products_on_category_id"
   add_index "products", ["title", "description", "manufacturer"], :name => "fulltext_product"
-
-  create_table "roles", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "roles_users", :id => false, :force => true do |t|
-    t.integer "role_id"
-    t.integer "user_id"
-  end
 
   create_table "shipping_addresses", :force => true do |t|
     t.integer  "user_id"
@@ -227,8 +218,8 @@ ActiveRecord::Schema.define(:version => 20110128071513) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.boolean  "current_default", :default => false
     t.string   "session_id",      :default => ""
   end

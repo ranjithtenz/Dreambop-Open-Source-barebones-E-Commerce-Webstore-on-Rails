@@ -45,6 +45,8 @@ class CreditCard < ActiveRecord::Base
   end
 
   def valid_card?
+    #used to do credit card auth - but now we dont care
+    return true
     if Rails.env.test? == 'test' or Rails.env.development? == 'development'
       test = true
     else
@@ -63,11 +65,13 @@ class CreditCard < ActiveRecord::Base
         )
     billing_address = { :address => self.address, :city => self.city, :state => self.state, :zip => self.zip, :country => 'US', :phone => self.phone_number}
     response = gateway.authorize(rand(100) + 1, credit_card, {:billing_address => billing_address})
+    ##used to do the following to validate address
     @ups = Shipping::UPS.new(:city => self.city, :state => self.state, :zip => self.zip)
     unless @ups.valid_address?
       errors.add(:base, 'You seem to have an invalid address. Please ensure you have the proper city, state, and zip.')
       return false
     end
+    ######
     #avs_success = false
     #puts 'street match is ' + response.avs_result[:street_match]
     #if response.avs_result['street_match'] == 'Y'

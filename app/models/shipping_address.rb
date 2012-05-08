@@ -11,8 +11,9 @@ class ShippingAddress < ActiveRecord::Base
   end
 
   def valid_address
-    @ups = Shipping::UPS.new(:city => self.city, :state => self.state, :zip => self.zip)
-    return if @ups.valid_address?
-    errors.add(:base, 'You seem to have an invalid address. Please ensure you have the proper city, state, and zip.')
+    #used to do this to validate address
+    #@ups = Shipping::UPS.new(:city => self.city, :state => self.state, :zip => self.zip)
+    #return if @ups.valid_address?
+    #errors.add(:base, 'You seem to have an invalid address. Please ensure you have the proper city, state, and zip.')
   end
 end

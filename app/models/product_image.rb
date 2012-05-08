@@ -1,4 +1,4 @@
-include Magick
+#include Magick
 class ProductImage < ActiveRecord::Base
   acts_as_tree :order => "filename"
   belongs_to :product

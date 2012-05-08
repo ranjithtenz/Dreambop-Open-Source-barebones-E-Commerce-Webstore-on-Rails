@@ -29,7 +29,7 @@
     </p>
     <p>
       <%= f.label :state %><br />
-      <%= state_select(:shipping_address, :state) %>
+      <%= f.select(:state, us_states) %>
     </p>
     <p>
       <%= f.label :zip %><br />

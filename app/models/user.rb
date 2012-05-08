@@ -1,5 +1,5 @@
 require 'digest/sha1'
-require 'lib/authenticated_system.rb'
+require 'authenticated_system.rb'
 
 class User < ActiveRecord::Base
   include Authentication
