@@ -51,7 +51,7 @@ class Order < ActiveRecord::Base
 
   def submit_to_gateway
     process_paypal and return true unless self.paypal_details.blank? 
-    if RAILS_ENV == 'test' or RAILS_ENV == 'development'
+    if Rails.env.test? == 'test' or Rails.env.development? == 'development'
       test = true
     else
       test = false

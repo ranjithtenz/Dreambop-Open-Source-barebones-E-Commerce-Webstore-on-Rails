@@ -153,7 +153,7 @@ class OrdersController < ApplicationController
 =end
 private
   def gateway
-    if RAILS_ENV == 'test' or RAILS_ENV == 'development'
+    if Rails.env.test? == 'test' or Rails.env.development? == 'development'
       ActiveMerchant::Billing::Base.mode = :test
       @gateway ||= ActiveMerchant::Billing::PaypalExpressGateway.new(
         :login => "thedude.yourdomain.com",

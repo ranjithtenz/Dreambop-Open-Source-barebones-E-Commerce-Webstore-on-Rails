@@ -1,7 +1,7 @@
 development:
   bucket_name: buymeyo_prod
-  access_key_id: 1KGQM1R0G4E04Q11EE82
-  secret_access_key: 8Qw1pJ59kgjxvIBPOfMizRDT1Z0KgGKPfvqpXLNU
+  access_key_id: FFFFFFFFFFFFFFFFFFFFF
+  secret_access_key: 011111101111111111111
 
 test:
   bucket_name: appname_test
@@ -11,5 +11,5 @@ test:
 
 production:
   bucket_name: buymeyo_prod
-  access_key_id: 1KGQM1R0G4E04Q11EE82
-  secret_access_key: 8Qw1pJ59kgjxvIBPOfMizRDT1Z0KgGKPfvqpXLNU
+  access_key_id: 2938839399388383838
+  secret_access_key: 0399383883883883

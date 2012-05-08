@@ -45,7 +45,7 @@ class CreditCard < ActiveRecord::Base
   end
 
   def valid_card?
-    if RAILS_ENV == 'test' or RAILS_ENV == 'development'
+    if Rails.env.test? == 'test' or Rails.env.development? == 'development'
       test = true
     else
       test = false

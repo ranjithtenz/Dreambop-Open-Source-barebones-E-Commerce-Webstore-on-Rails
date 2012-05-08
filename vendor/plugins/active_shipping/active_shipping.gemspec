@@ -9,7 +9,6 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["James MacAulay", "Tobi Lutke", "Cody Fauser", "Jimmy Baker"]
   s.email       = ["james@shopify.com"]
-  s.version     = '0.9.7'
   s.homepage    = "http://github.com/shopify/active_shipping"
   s.summary     = "Shipping API extension for Active Merchant"
   s.description = "Get rates and tracking info from various shipping carriers."
@@ -18,8 +17,13 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = "active_shipping"
 
   s.add_dependency('activesupport', '>= 2.3.5')
+  s.add_dependency('i18n')
+  s.add_dependency('active_utils', '>= 1.0.1')
+  s.add_dependency('builder')
+  s.add_dependency('json', '>= 1.5.1')
 
-  s.add_development_dependency "mocha"
+  s.add_development_dependency('rake')
+  s.add_development_dependency('mocha')
 
   s.files        = Dir.glob("lib/**/*") + %w(MIT-LICENSE README.markdown CHANGELOG)
   s.require_path = 'lib'

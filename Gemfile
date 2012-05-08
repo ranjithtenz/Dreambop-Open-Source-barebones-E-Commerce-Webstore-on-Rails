@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.3'
+gem 'rails', '3.2.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -8,8 +8,8 @@ gem 'rails', '3.0.3'
 #gem 'sqlite3-ruby', :require => 'sqlite3'
 #gem 'mysql'
 gem "shipping"
-gem 'will_paginate', '~> 3.0.beta'
-gem 'rmagick', '<= 2.9.0', :require => 'RMagick'
+gem 'will_paginate' #, '~> 3.0.beta'
+gem 'rmagick' #, '<= 2.9.0', :require => 'RMagick'
 gem "aws-s3", :require => "aws/s3"
 gem 'memcache-client'
 gem 'cached_model'

@@ -86,10 +86,7 @@ module ActiveMerchant
       }
 
       def self.service_name_for_code(service_code)
-        ServiceTypes[service_code] || begin
-          name = service_code.downcase.split('_').collect{|word| word.capitalize }.join(' ')
-          "FedEx #{name.sub(/Fedex /, '')}"
-        end
+        ServiceTypes[service_code] || "FedEx #{service_code.titleize.sub(/Fedex /, '')}"
       end
       
       def requirements
@@ -218,6 +215,8 @@ module ActiveMerchant
           xml_node << XmlNode.new('Address') do |address_node|
             address_node << XmlNode.new('PostalCode', location.postal_code)
             address_node << XmlNode.new("CountryCode", location.country_code(:alpha2))
+
+            address_node << XmlNode.new("Residential", true) unless location.commercial?
           end
         end
       end
@@ -237,13 +236,14 @@ module ActiveMerchant
           is_saturday_delivery = rated_shipment.get_text('AppliedOptions').to_s == 'SATURDAY_DELIVERY'
           service_type = is_saturday_delivery ? "#{service_code}_SATURDAY_DELIVERY" : service_code
           
+          currency = handle_uk_currency(rated_shipment.get_text('RatedShipmentDetails/ShipmentRateDetail/TotalNetCharge/Currency').to_s)
           rate_estimates << RateEstimate.new(origin, destination, @@name,
                               self.class.service_name_for_code(service_type),
                               :service_code => service_code,
                               :total_price => rated_shipment.get_text('RatedShipmentDetails/ShipmentRateDetail/TotalNetCharge/Amount').to_s.to_f,
-                              :currency => rated_shipment.get_text('RatedShipmentDetails/ShipmentRateDetail/TotalNetCharge/Currency').to_s,
+                              :currency => currency,
                               :packages => packages,
-                              :delivery_date => rated_shipment.get_text('DeliveryTimestamp').to_s)
+                              :delivery_range => [rated_shipment.get_text('DeliveryTimestamp').to_s] * 2)
 	    end
 		
         if rate_estimates.empty?
@@ -276,11 +276,15 @@ module ActiveMerchant
               )
           
           tracking_details.elements.each('Events') do |event|
-            location = Location.new(
-              :city => event.elements['Address'].get_text('City').to_s,
-              :state => event.elements['Address'].get_text('StateOrProvinceCode').to_s,
-              :postal_code => event.elements['Address'].get_text('PostalCode').to_s,
-              :country => event.elements['Address'].get_text('CountryCode').to_s)
+            address  = event.elements['Address']
+
+            city     = address.get_text('City').to_s
+            state    = address.get_text('StateOrProvinceCode').to_s
+            zip_code = address.get_text('PostalCode').to_s
+            country  = address.get_text('CountryCode').to_s
+            next if country.blank?
+            
+            location = Location.new(:city => city, :state => state, :postal_code => zip_code, :country => country)
             description = event.get_text('EventDescription').to_s
             
             # for now, just assume UTC, even though it probably isn't
@@ -311,13 +315,16 @@ module ActiveMerchant
       
       def response_message(document)
         response_node = response_status_node(document)
-        "#{response_status_node(document).get_text('Severity').to_s} - #{response_node.get_text('Code').to_s}: #{response_node.get_text('Message').to_s}"
+        "#{response_status_node(document).get_text('Severity')} - #{response_node.get_text('Code')}: #{response_node.get_text('Message')}"
       end
       
       def commit(request, test = false)
         ssl_post(test ? TEST_URL : LIVE_URL, request.gsub("\n",''))        
       end
-    
+      
+      def handle_uk_currency(currency)
+        currency =~ /UKL/i ? 'GBP' : currency
+      end
     end
   end
 end

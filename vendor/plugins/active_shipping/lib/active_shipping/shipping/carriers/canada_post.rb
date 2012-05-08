@@ -79,6 +79,11 @@ module ActiveMerchant
        '-50000' => "Internal problem - Please contact Sell Online Help Desk"
       }
       
+      NON_ISO_COUNTRY_NAMES = {
+        'Russian Federation' => 'Russia'
+      }
+
+
       def requirements
         [:login]
       end
@@ -122,7 +127,7 @@ module ActiveMerchant
             request << XmlNode.new('merchantCPCID', @options[:login])
             request << XmlNode.new('fromPostalCode', origin.postal_code)
             request << XmlNode.new('turnAroundTime', options[:turn_around_time] ? options[:turn_around_time] : DEFAULT_TURN_AROUND_TIME)
-            request << XmlNode.new('itemsPrice', line_items.sum(&:value))
+            request << XmlNode.new('itemsPrice', dollar_amount(line_items.sum(&:value)))
 
             #line items
             request << build_line_items(line_items)
@@ -131,7 +136,7 @@ module ActiveMerchant
             #NOTE: These tags MUST be after line items
             request << XmlNode.new('city', destination.city)
             request << XmlNode.new('provOrState', destination.province)
-            request << XmlNode.new('country', destination.country)
+            request << XmlNode.new('country', handle_non_iso_country_names(destination.country))
             request << XmlNode.new('postalCode', destination.postal_code)
           end
         end
@@ -148,15 +153,14 @@ module ActiveMerchant
         boxes = []
         if success
           xml.elements.each('eparcel/ratesAndServicesResponse/product') do |product|
-            service_name = (@options[:french] ? @@name_french : @@name) + product.get_text('name').to_s
+            service_name = (@options[:french] ? @@name_french : @@name) + " " + product.get_text('name').to_s
             service_code = product.attribute('id').to_s
-            delivery_date = date_for(product.get_text('deliveryDate').to_s)
 
             rate_estimates << RateEstimate.new(origin, destination, @@name, service_name,
               :service_code => service_code,
               :total_price => product.get_text('rate').to_s,
-              :delivery_date => delivery_date,
-              :currency => 'CAD'
+              :currency => 'CAD',
+              :delivery_range => [product.get_text('deliveryDate').to_s] * 2
             )
           end
 
@@ -204,12 +208,6 @@ module ActiveMerchant
 
         CanadaPostRateResponse.new(success, message, Hash.from_xml(response), :rates => rate_estimates, :xml => response, :boxes => boxes, :postal_outlets => postal_outlets)
       end
-      
-      def date_for(string)
-        string && Time.parse(string)
-      rescue ArgumentError
-        nil
-      end
 
       def response_success?(xml)
         value = xml.get_text('eparcel/ratesAndServicesResponse/statusCode').to_s
@@ -249,6 +247,14 @@ module ActiveMerchant
         end
         
         xml_line_items
+      end
+      
+      def dollar_amount(cents)
+        "%0.2f" % (cents / 100.0)
+      end
+      
+      def handle_non_iso_country_names(country)
+        NON_ISO_COUNTRY_NAMES[country.to_s] || country
       end
     end
   end
