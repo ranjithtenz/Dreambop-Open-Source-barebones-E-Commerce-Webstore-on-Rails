@@ -1,5 +1,7 @@
 class Admin::CategoriesController < ApplicationController
   
+  before_filter :login_required, :admin_login_required
+
   def new_sub
     @parent_id = params[:id]
     @category = Category.new

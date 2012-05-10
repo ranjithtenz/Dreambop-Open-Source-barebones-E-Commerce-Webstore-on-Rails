@@ -4,7 +4,7 @@ require 'authenticated_system.rb'
 class User < ActiveRecord::Base
   include Authentication
   include Authentication::ByPassword
-  include Authentication::ByCookieToken
+  #include Authentication::ByCookieToken
 
   has_and_belongs_to_many :roles
   has_one :cart, :dependent => :destroy
@@ -28,6 +28,14 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation
 
 
+
+  def has_role?(type)
+    rs = self.roles
+    rs.each do |r|
+      return true if r.name == type
+    end
+    return false
+  end
 
   # Authenticates a user by their email and unencrypted password.  Returns the user or nil.
   #
@@ -65,4 +73,44 @@ class User < ActiveRecord::Base
     UserMailer.deliver_new_password(self) 
     self.save
   end
+
+  def remember_token?
+    (!remember_token.blank?) && 
+      remember_token_expires_at && (Time.now.utc < remember_token_expires_at.utc)
+  end
+
+  # These create and unset the fields required for remembering users between browser closes
+  def remember_me
+    remember_me_for 2.weeks
+  end
+
+  def remember_me_for(time)
+    remember_me_until time.from_now.utc
+  end
+
+  def remember_me_until(time)
+    self.remember_token_expires_at = time
+    self.remember_token            = self.class.make_token
+    return false
+  end
+
+  # refresh token (keeping same expires_at) if it exists
+  def refresh_token
+    if remember_token?
+      self.remember_token = self.class.make_token 
+      return false
+    end
+  end
+
+  # 
+  # Deletes the server-side record of the authentication token.  The
+  # client-side (browser cookie) and server-side (this remember_token) must
+  # always be deleted together.
+  #
+  def forget_me
+    self.remember_token_expires_at = nil
+    self.remember_token            = nil
+    save(false)
+  end
+
 end

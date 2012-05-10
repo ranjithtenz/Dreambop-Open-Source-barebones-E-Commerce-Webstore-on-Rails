@@ -3,7 +3,12 @@
 <br/>
 <br/>
 <div id="entry-form">
-  You are logged in as <%= current_user.email %>
+  You are logged in as <%= current_user.email %> <% if current_user.has_role?('admin') %> (You are an admin) <% end %>
+  <p>
+  <% if current_user.has_role?('admin') %> 
+    <%= link_to 'Change category tree', admin_categories_path %>
+  <% end %>
+  </p>
   <p>
   <%= link_to 'Change your password', change_password_path %>
   </p>
@@ -12,6 +17,8 @@
       <%= link_to 'Update your credit card details', edit_credit_card_path %>
     </p>
   <% end %>
+
+
   <p>
   <%= link_to 'Logout', logout_path %>
   </p>

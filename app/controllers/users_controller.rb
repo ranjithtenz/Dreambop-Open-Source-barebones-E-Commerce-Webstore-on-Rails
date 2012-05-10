@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def index
   end
+
   # render new.rhtml
   def new
     @user = User.new
