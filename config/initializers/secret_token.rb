@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Dreambop3::Application.config.secret_token = '81e043320cce1e078b2ada26c15d84d7878f733ae7850893e3d6467b40bc486ec24b2cf7d865634aa29b39fc6b53bZ0017b09a4d74fe001eb0b7994F778b9ea23'
+Dreambop3::Application.config.secret_token = 'd402546fc66e4d9808bd927426a1642272d86553e3bc69dcdb13c1f028e6ecf3c0bb79e391d9c21a63fd3d1854f83ab0227dc12a9676cb4e2b54b7768cff3c72'

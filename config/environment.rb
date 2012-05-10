@@ -10,7 +10,8 @@ gem 'will_paginate'
 gem "aws-s3", :require_as => "aws/s3"
 gem 'memcache-client'
 gem 'cached_model'
-#gem 'mysql2'
-gem 'mysql'
+gem 'mysql2'
+#gem 'mysql'
+gem 'active_shipping'
 
 REST_AUTH_SITE_KEY         = 'c61ffc0052fd2935baaf9d71e9aR87932278a31b'

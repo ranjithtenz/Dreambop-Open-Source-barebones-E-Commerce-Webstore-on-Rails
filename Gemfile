@@ -13,8 +13,9 @@ gem 'will_paginate' #, '~> 3.0.beta'
 gem "aws-s3", :require => "aws/s3"
 gem 'memcache-client'
 gem 'cached_model'
-#gem 'mysql2'
-gem 'mysql'
+gem 'active_shipping'
+gem 'mysql2'
+#gem 'mysql'
 #gem 'passenger'
 gem 'activemerchant', :require => "active_merchant"
 

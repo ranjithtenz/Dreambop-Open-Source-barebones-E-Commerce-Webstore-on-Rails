@@ -13,7 +13,9 @@ class CreateProductTables < ActiveRecord::Migration
       t.column :weight, :float, :default => 0.0
       t.timestamps
     end
-    execute "CREATE FULLTEXT INDEX fulltext_product ON products (title, description, manufacturer);"
+    unless Rails.env.test?
+      execute "CREATE FULLTEXT INDEX fulltext_product ON products (title, description, manufacturer);"
+    end
     add_index :products, :title, :unique => true
 
     create_table :dsdi_products do |t|

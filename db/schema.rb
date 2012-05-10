@@ -207,7 +207,6 @@ ActiveRecord::Schema.define(:version => 20110128071513) do
   end
 
   add_index "products", ["category_id"], :name => "index_products_on_category_id"
-  add_index "products", ["title", "description", "manufacturer"], :name => "fulltext_product"
 
   create_table "shipping_addresses", :force => true do |t|
     t.integer  "user_id"

@@ -15,6 +15,12 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.1.2)
+    active_shipping (0.9.14)
+      active_utils (>= 1.0.1)
+      activesupport (>= 2.3.5)
+      builder
+      i18n
+      json (>= 1.5.1)
     active_utils (1.0.3)
       activesupport (>= 2.3.11)
       i18n
@@ -66,7 +72,7 @@ GEM
     money (3.7.1)
       i18n (~> 0.4)
     multi_json (1.3.4)
-    mysql (2.8.1)
+    mysql2 (0.3.11)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -110,10 +116,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_shipping
   activemerchant
   aws-s3
   cached_model
   memcache-client
-  mysql
+  mysql2
   rails (= 3.2.3)
   will_paginate

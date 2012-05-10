@@ -1,0 +1,55 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'categories' %>
+<% end %>
+<% content_for :page_title do -%>
+  Edit the available categories
+<% end %>
+<div id="breadcrumb">
+<% i = 0 %>
+<% @breadcrumbs.reverse.each do |crumb| %>
+    <% unless crumb.children.empty? %>
+    <%= link_to crumb.display_name.upcase, edit_admin_category_path(crumb) %>
+    <% else %>
+    <%= crumb.display_name.upcase %>
+    <% end %>
+    <% unless @breadcrumbs.size - 1 == i %>
+      &gt;
+    <% end %>
+    <% i = i + 1 %>
+<% end %>
+</div>
+<div class="section">CATEGORY: <%= @category.name %> <%= link_to 'Edit', edit_admin_category_path(@category)  %> </div>
+<br/>
+  <%= form_for([:admin, @category]) do |f| %>
+    <% if @category.errors.any? %>
+      <% @category.errors.full_messages.each do |msg| %>  
+        <%= msg %><br>
+      <% end %>  
+    <% end %>  
+
+    <p>
+      <%= f.label :edit_the_name %><br />
+      <%= f.text_field :name %> <%= f.submit 'Change' %>
+    </p>
+
+  <% end %>
+<br/>
+Sub Categories for &quot;<%= @category.name %>&quot;
+<br/>
+  <table>
+  <% for cat in @sub_categories %>
+      <tr>
+          <td>
+              <%= cat.name %>
+          </td>
+          <td>
+              <%= link_to 'view/edit', edit_admin_category_path(cat) %>
+          </td>
+      </tr>
+  <% end %>
+  </table>
+<br/>
+<%= link_to :action => 'new_sub', :controller => 'admin/categories', :id => @category.id do %>
+  Add new subcategory to the category <b><%= @category.name  %></b>
+<% end %>
+

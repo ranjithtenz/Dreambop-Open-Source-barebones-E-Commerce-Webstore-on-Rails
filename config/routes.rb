@@ -75,6 +75,17 @@ Dreambop3::Application.routes.draw do
   #     end
   #   end
 
+  namespace :admin do
+    resources :categories
+    controller :categories do
+      match 'categories(/:action(/:id(.:format)))'
+    end
+    resources :products
+    controller :products do
+      match 'products(/:action(/:id(.:format)))'
+    end
+  end
+
   # Sample resource route within a namespace:
   #   namespace :admin do
   #     # Directs /admin/products/* to Admin::ProductsController

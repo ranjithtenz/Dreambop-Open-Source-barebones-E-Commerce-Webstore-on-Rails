@@ -1,0 +1,23 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'multi-prod' %>
+<% end %>
+<% content_for :page_title do -%>
+  Edit the available categories
+<% end %>
+<div class="section">EDITING CATEGORY: <%= @main_category.name %> <%= link_to 'Edit', admin_category(@category)  %> </div>
+Sub Categories for <%= @main_category.name %>
+<br/>
+<table>
+<% foreach category in @sub_categories %>
+    <tr>
+        <td>
+            <%= catgory.name %>
+        </td>
+        <td>
+            <%= link_to 'View', admin_category(@category)  %> 
+        </td>
+        <td>
+            <%= link_to 'edit', edit_admin_category(@category) %>
+        </td>
+    </tr>
+<% end %>
