@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.1.49, for apple-darwin10.3.0 (i386)
 --
--- Host: localhost    Database: dreambop_public
+-- Host: localhost    Database: faucetcentral
 -- ------------------------------------------------------
 -- Server version	5.1.49
 
@@ -57,7 +57,7 @@ CREATE TABLE `carts` (
   `session_id` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `index_carts_on_user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=311 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=312 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,6 +66,7 @@ CREATE TABLE `carts` (
 
 LOCK TABLES `carts` WRITE;
 /*!40000 ALTER TABLE `carts` DISABLE KEYS */;
+INSERT INTO `carts` VALUES (311,325,'2012-05-11 23:26:41','2012-05-11 23:26:41','');
 /*!40000 ALTER TABLE `carts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -362,6 +363,7 @@ CREATE TABLE `product_images` (
   `width` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
+  `hero` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `index_product_images_on_product_id_and_parent_id` (`product_id`,`parent_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=235710 DEFAULT CHARSET=latin1;
@@ -373,7 +375,7 @@ CREATE TABLE `product_images` (
 
 LOCK TABLES `product_images` WRITE;
 /*!40000 ALTER TABLE `product_images` DISABLE KEYS */;
-INSERT INTO `product_images` VALUES (222263,'185162-lenovo-thinkpad-w500-notebook-core-2-duo-t9600-2-8ghz-15-4-black-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-2gb-ddr3-sdram-160gb-hdd-dvd-writer-wi-fi-gigabit-ethernet-bluetooth-windows-xp-p-x300.jpg','.jpg',185162,0,0,300,'2010-12-27 12:19:29','2010-12-27 12:19:29'),(222264,'185162-lenovo-thinkpad-w500-notebook-core-2-duo-t9600-2-8ghz-15-4-black-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-2gb-ddr3-sdram-160gb-hdd-dvd-writer-wi-fi-gigabit-ethernet-bluetooth-windows-xp-p-x150.jpg','.jpg',185162,222263,1,150,'2010-12-27 12:19:29','2010-12-27 12:19:29'),(222265,'185162-lenovo-thinkpad-w500-notebook-core-2-duo-t9600-2-8ghz-15-4-black-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-2gb-ddr3-sdram-160gb-hdd-dvd-writer-wi-fi-gigabit-ethernet-bluetooth-windows-xp-p-x75.jpg','.jpg',185162,222263,1,75,'2010-12-27 12:19:29','2010-12-27 12:19:29'),(222460,'185265-lenovo-thinkpad-w500-notebook-core-2-duo-t9600-2-8ghz-15-4-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-4gb-ddr3-sdram-250gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-bluetooth-windows-vista-busine-x300.jpg','.jpg',185265,0,0,300,'2010-12-27 12:21:56','2010-12-27 12:21:56'),(222461,'185265-lenovo-thinkpad-w500-notebook-core-2-duo-t9600-2-8ghz-15-4-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-4gb-ddr3-sdram-250gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-bluetooth-windows-vista-busine-x150.jpg','.jpg',185265,222460,1,150,'2010-12-27 12:21:56','2010-12-27 12:21:56'),(222462,'185265-lenovo-thinkpad-w500-notebook-core-2-duo-t9600-2-8ghz-15-4-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-4gb-ddr3-sdram-250gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-bluetooth-windows-vista-busine-x75.jpg','.jpg',185265,222460,1,75,'2010-12-27 12:21:56','2010-12-27 12:21:56'),(222495,'185279-lenovo-thinkpad-t500-notebook-core-2-duo-p8600-2-4ghz-15-4-black-intel-centrino-2-core-2-duo-p8600-2-4ghz-15-4-wsxga-3gb-ddr3-sdram-160gb-hdd-dvd-writer-dvdr-rw-gigabit-ethernet-wi-fi-x300.jpg','.jpg',185279,0,0,300,'2010-12-27 12:22:18','2010-12-27 12:22:18'),(222496,'185279-lenovo-thinkpad-t500-notebook-core-2-duo-p8600-2-4ghz-15-4-black-intel-centrino-2-core-2-duo-p8600-2-4ghz-15-4-wsxga-3gb-ddr3-sdram-160gb-hdd-dvd-writer-dvdr-rw-gigabit-ethernet-wi-fi-x150.jpg','.jpg',185279,222495,1,150,'2010-12-27 12:22:18','2010-12-27 12:22:18'),(222497,'185279-lenovo-thinkpad-t500-notebook-core-2-duo-p8600-2-4ghz-15-4-black-intel-centrino-2-core-2-duo-p8600-2-4ghz-15-4-wsxga-3gb-ddr3-sdram-160gb-hdd-dvd-writer-dvdr-rw-gigabit-ethernet-wi-fi-x75.jpg','.jpg',185279,222495,1,75,'2010-12-27 12:22:18','2010-12-27 12:22:18'),(222504,'185335-lenovo-thinkpad-r500-notebook-core-2-duo-p8400-2-26ghz-15-4-black-intel-core-2-duo-p8400-2-26ghz-15-4-wxga-2gb-ddr3-sdram-160gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-pc-dos-license-black-x300.jpg','.jpg',185335,0,0,300,'2010-12-27 12:23:25','2010-12-27 12:23:26'),(222505,'185335-lenovo-thinkpad-r500-notebook-core-2-duo-p8400-2-26ghz-15-4-black-intel-core-2-duo-p8400-2-26ghz-15-4-wxga-2gb-ddr3-sdram-160gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-pc-dos-license-black-x150.jpg','.jpg',185335,222504,1,150,'2010-12-27 12:23:26','2010-12-27 12:23:26'),(222506,'185335-lenovo-thinkpad-r500-notebook-core-2-duo-p8400-2-26ghz-15-4-black-intel-core-2-duo-p8400-2-26ghz-15-4-wxga-2gb-ddr3-sdram-160gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-pc-dos-license-black-x75.jpg','.jpg',185335,222504,1,75,'2010-12-27 12:23:26','2010-12-27 12:23:26'),(222510,'185339-lenovo-thinkpad-r500-notebook-core-2-duo-t6570-2-10ghz-15-4-black-intel-centrino-core-2-duo-t6570-2-1ghz-15-4-wxga-2gb-ddr3-sdram-250gb-hdd-dvd-writer-dvdr-rw-gigabit-ethernet-wi-fi-b-x300.jpg','.jpg',185339,0,0,300,'2010-12-27 12:23:31','2010-12-27 12:23:31'),(222511,'185339-lenovo-thinkpad-r500-notebook-core-2-duo-t6570-2-10ghz-15-4-black-intel-centrino-core-2-duo-t6570-2-1ghz-15-4-wxga-2gb-ddr3-sdram-250gb-hdd-dvd-writer-dvdr-rw-gigabit-ethernet-wi-fi-b-x150.jpg','.jpg',185339,222510,1,150,'2010-12-27 12:23:31','2010-12-27 12:23:31'),(222512,'185339-lenovo-thinkpad-r500-notebook-core-2-duo-t6570-2-10ghz-15-4-black-intel-centrino-core-2-duo-t6570-2-1ghz-15-4-wxga-2gb-ddr3-sdram-250gb-hdd-dvd-writer-dvdr-rw-gigabit-ethernet-wi-fi-b-x75.jpg','.jpg',185339,222510,1,75,'2010-12-27 12:23:31','2010-12-27 12:23:31'),(222561,'185379-lenovo-thinkpad-w500-mobile-workstation-core-2-duo-t9600-2-8ghz-15-4-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-3gb-ddr3-sdram-320gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-bluetooth-windows-vi-x300.jpg','.jpg',185379,0,0,300,'2010-12-27 12:24:25','2010-12-27 12:24:26'),(222562,'185379-lenovo-thinkpad-w500-mobile-workstation-core-2-duo-t9600-2-8ghz-15-4-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-3gb-ddr3-sdram-320gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-bluetooth-windows-vi-x150.jpg','.jpg',185379,222561,1,150,'2010-12-27 12:24:25','2010-12-27 12:24:25'),(222563,'185379-lenovo-thinkpad-w500-mobile-workstation-core-2-duo-t9600-2-8ghz-15-4-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-3gb-ddr3-sdram-320gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-bluetooth-windows-vi-x75.jpg','.jpg',185379,222561,1,75,'2010-12-27 12:24:25','2010-12-27 12:24:25'),(222896,'185514-panasonic-toughbook-19-notebook-intel-core-2-duo-su9300-1-2ghz-10-4-xga-2gb-ddr2-sdram-160gb-hdd-gigabit-ethernet-windows-vista-windows-xp-professional-downgradable-magnesium-alloy-x300.jpg','.jpg',185514,0,0,300,'2010-12-27 12:27:43','2010-12-27 12:27:43'),(222897,'185514-panasonic-toughbook-19-notebook-intel-core-2-duo-su9300-1-2ghz-10-4-xga-2gb-ddr2-sdram-160gb-hdd-gigabit-ethernet-windows-vista-windows-xp-professional-downgradable-magnesium-alloy-x150.jpg','.jpg',185514,222896,1,150,'2010-12-27 12:27:43','2010-12-27 12:27:43'),(222898,'185514-panasonic-toughbook-19-notebook-intel-core-2-duo-su9300-1-2ghz-10-4-xga-2gb-ddr2-sdram-160gb-hdd-gigabit-ethernet-windows-vista-windows-xp-professional-downgradable-magnesium-alloy-x75.jpg','.jpg',185514,222896,1,75,'2010-12-27 12:27:43','2010-12-27 12:27:43'),(224087,'186133-lenovo-thinkpad-r400-notebook-core-2-duo-p8400-2-26ghz-14-1-black-intel-core-2-duo-p8400-2-26ghz-14-1-wxga-3gb-ddr3-sdram-160gb-hdd-combo-drive-cd-rw-dvd-rom-gigabit-ethernet-wi-fi-windo-x300.jpg','.jpg',186133,0,0,300,'2010-12-27 12:52:49','2010-12-27 12:52:49'),(224088,'186133-lenovo-thinkpad-r400-notebook-core-2-duo-p8400-2-26ghz-14-1-black-intel-core-2-duo-p8400-2-26ghz-14-1-wxga-3gb-ddr3-sdram-160gb-hdd-combo-drive-cd-rw-dvd-rom-gigabit-ethernet-wi-fi-windo-x150.jpg','.jpg',186133,224087,1,150,'2010-12-27 12:52:49','2010-12-27 12:52:49'),(224089,'186133-lenovo-thinkpad-r400-notebook-core-2-duo-p8400-2-26ghz-14-1-black-intel-core-2-duo-p8400-2-26ghz-14-1-wxga-3gb-ddr3-sdram-160gb-hdd-combo-drive-cd-rw-dvd-rom-gigabit-ethernet-wi-fi-windo-x75.jpg','.jpg',186133,224087,1,75,'2010-12-27 12:52:49','2010-12-27 12:52:49');
+INSERT INTO `product_images` VALUES (222263,'185162-lenovo-thinkpad-w500-notebook-core-2-duo-t9600-2-8ghz-15-4-black-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-2gb-ddr3-sdram-160gb-hdd-dvd-writer-wi-fi-gigabit-ethernet-bluetooth-windows-xp-p-x300.jpg','.jpg',185162,0,0,300,'2010-12-27 12:19:29','2010-12-27 12:19:29',0),(222264,'185162-lenovo-thinkpad-w500-notebook-core-2-duo-t9600-2-8ghz-15-4-black-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-2gb-ddr3-sdram-160gb-hdd-dvd-writer-wi-fi-gigabit-ethernet-bluetooth-windows-xp-p-x150.jpg','.jpg',185162,222263,1,150,'2010-12-27 12:19:29','2010-12-27 12:19:29',0),(222265,'185162-lenovo-thinkpad-w500-notebook-core-2-duo-t9600-2-8ghz-15-4-black-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-2gb-ddr3-sdram-160gb-hdd-dvd-writer-wi-fi-gigabit-ethernet-bluetooth-windows-xp-p-x75.jpg','.jpg',185162,222263,1,75,'2010-12-27 12:19:29','2010-12-27 12:19:29',0),(222460,'185265-lenovo-thinkpad-w500-notebook-core-2-duo-t9600-2-8ghz-15-4-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-4gb-ddr3-sdram-250gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-bluetooth-windows-vista-busine-x300.jpg','.jpg',185265,0,0,300,'2010-12-27 12:21:56','2010-12-27 12:21:56',0),(222461,'185265-lenovo-thinkpad-w500-notebook-core-2-duo-t9600-2-8ghz-15-4-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-4gb-ddr3-sdram-250gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-bluetooth-windows-vista-busine-x150.jpg','.jpg',185265,222460,1,150,'2010-12-27 12:21:56','2010-12-27 12:21:56',0),(222462,'185265-lenovo-thinkpad-w500-notebook-core-2-duo-t9600-2-8ghz-15-4-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-4gb-ddr3-sdram-250gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-bluetooth-windows-vista-busine-x75.jpg','.jpg',185265,222460,1,75,'2010-12-27 12:21:56','2010-12-27 12:21:56',0),(222495,'185279-lenovo-thinkpad-t500-notebook-core-2-duo-p8600-2-4ghz-15-4-black-intel-centrino-2-core-2-duo-p8600-2-4ghz-15-4-wsxga-3gb-ddr3-sdram-160gb-hdd-dvd-writer-dvdr-rw-gigabit-ethernet-wi-fi-x300.jpg','.jpg',185279,0,0,300,'2010-12-27 12:22:18','2010-12-27 12:22:18',0),(222496,'185279-lenovo-thinkpad-t500-notebook-core-2-duo-p8600-2-4ghz-15-4-black-intel-centrino-2-core-2-duo-p8600-2-4ghz-15-4-wsxga-3gb-ddr3-sdram-160gb-hdd-dvd-writer-dvdr-rw-gigabit-ethernet-wi-fi-x150.jpg','.jpg',185279,222495,1,150,'2010-12-27 12:22:18','2010-12-27 12:22:18',0),(222497,'185279-lenovo-thinkpad-t500-notebook-core-2-duo-p8600-2-4ghz-15-4-black-intel-centrino-2-core-2-duo-p8600-2-4ghz-15-4-wsxga-3gb-ddr3-sdram-160gb-hdd-dvd-writer-dvdr-rw-gigabit-ethernet-wi-fi-x75.jpg','.jpg',185279,222495,1,75,'2010-12-27 12:22:18','2010-12-27 12:22:18',0),(222504,'185335-lenovo-thinkpad-r500-notebook-core-2-duo-p8400-2-26ghz-15-4-black-intel-core-2-duo-p8400-2-26ghz-15-4-wxga-2gb-ddr3-sdram-160gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-pc-dos-license-black-x300.jpg','.jpg',185335,0,0,300,'2010-12-27 12:23:25','2010-12-27 12:23:26',0),(222505,'185335-lenovo-thinkpad-r500-notebook-core-2-duo-p8400-2-26ghz-15-4-black-intel-core-2-duo-p8400-2-26ghz-15-4-wxga-2gb-ddr3-sdram-160gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-pc-dos-license-black-x150.jpg','.jpg',185335,222504,1,150,'2010-12-27 12:23:26','2010-12-27 12:23:26',0),(222506,'185335-lenovo-thinkpad-r500-notebook-core-2-duo-p8400-2-26ghz-15-4-black-intel-core-2-duo-p8400-2-26ghz-15-4-wxga-2gb-ddr3-sdram-160gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-pc-dos-license-black-x75.jpg','.jpg',185335,222504,1,75,'2010-12-27 12:23:26','2010-12-27 12:23:26',0),(222510,'185339-lenovo-thinkpad-r500-notebook-core-2-duo-t6570-2-10ghz-15-4-black-intel-centrino-core-2-duo-t6570-2-1ghz-15-4-wxga-2gb-ddr3-sdram-250gb-hdd-dvd-writer-dvdr-rw-gigabit-ethernet-wi-fi-b-x300.jpg','.jpg',185339,0,0,300,'2010-12-27 12:23:31','2010-12-27 12:23:31',0),(222511,'185339-lenovo-thinkpad-r500-notebook-core-2-duo-t6570-2-10ghz-15-4-black-intel-centrino-core-2-duo-t6570-2-1ghz-15-4-wxga-2gb-ddr3-sdram-250gb-hdd-dvd-writer-dvdr-rw-gigabit-ethernet-wi-fi-b-x150.jpg','.jpg',185339,222510,1,150,'2010-12-27 12:23:31','2010-12-27 12:23:31',0),(222512,'185339-lenovo-thinkpad-r500-notebook-core-2-duo-t6570-2-10ghz-15-4-black-intel-centrino-core-2-duo-t6570-2-1ghz-15-4-wxga-2gb-ddr3-sdram-250gb-hdd-dvd-writer-dvdr-rw-gigabit-ethernet-wi-fi-b-x75.jpg','.jpg',185339,222510,1,75,'2010-12-27 12:23:31','2010-12-27 12:23:31',0),(222561,'185379-lenovo-thinkpad-w500-mobile-workstation-core-2-duo-t9600-2-8ghz-15-4-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-3gb-ddr3-sdram-320gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-bluetooth-windows-vi-x300.jpg','.jpg',185379,0,0,300,'2010-12-27 12:24:25','2010-12-27 12:24:26',0),(222562,'185379-lenovo-thinkpad-w500-mobile-workstation-core-2-duo-t9600-2-8ghz-15-4-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-3gb-ddr3-sdram-320gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-bluetooth-windows-vi-x150.jpg','.jpg',185379,222561,1,150,'2010-12-27 12:24:25','2010-12-27 12:24:25',0),(222563,'185379-lenovo-thinkpad-w500-mobile-workstation-core-2-duo-t9600-2-8ghz-15-4-intel-core-2-duo-t9600-2-8ghz-15-4-wuxga-3gb-ddr3-sdram-320gb-hdd-dvd-writer-gigabit-ethernet-wi-fi-bluetooth-windows-vi-x75.jpg','.jpg',185379,222561,1,75,'2010-12-27 12:24:25','2010-12-27 12:24:25',0),(222896,'185514-panasonic-toughbook-19-notebook-intel-core-2-duo-su9300-1-2ghz-10-4-xga-2gb-ddr2-sdram-160gb-hdd-gigabit-ethernet-windows-vista-windows-xp-professional-downgradable-magnesium-alloy-x300.jpg','.jpg',185514,0,0,300,'2010-12-27 12:27:43','2010-12-27 12:27:43',0),(222897,'185514-panasonic-toughbook-19-notebook-intel-core-2-duo-su9300-1-2ghz-10-4-xga-2gb-ddr2-sdram-160gb-hdd-gigabit-ethernet-windows-vista-windows-xp-professional-downgradable-magnesium-alloy-x150.jpg','.jpg',185514,222896,1,150,'2010-12-27 12:27:43','2010-12-27 12:27:43',0),(222898,'185514-panasonic-toughbook-19-notebook-intel-core-2-duo-su9300-1-2ghz-10-4-xga-2gb-ddr2-sdram-160gb-hdd-gigabit-ethernet-windows-vista-windows-xp-professional-downgradable-magnesium-alloy-x75.jpg','.jpg',185514,222896,1,75,'2010-12-27 12:27:43','2010-12-27 12:27:43',0),(224087,'186133-lenovo-thinkpad-r400-notebook-core-2-duo-p8400-2-26ghz-14-1-black-intel-core-2-duo-p8400-2-26ghz-14-1-wxga-3gb-ddr3-sdram-160gb-hdd-combo-drive-cd-rw-dvd-rom-gigabit-ethernet-wi-fi-windo-x300.jpg','.jpg',186133,0,0,300,'2010-12-27 12:52:49','2010-12-27 12:52:49',0),(224088,'186133-lenovo-thinkpad-r400-notebook-core-2-duo-p8400-2-26ghz-14-1-black-intel-core-2-duo-p8400-2-26ghz-14-1-wxga-3gb-ddr3-sdram-160gb-hdd-combo-drive-cd-rw-dvd-rom-gigabit-ethernet-wi-fi-windo-x150.jpg','.jpg',186133,224087,1,150,'2010-12-27 12:52:49','2010-12-27 12:52:49',0),(224089,'186133-lenovo-thinkpad-r400-notebook-core-2-duo-p8400-2-26ghz-14-1-black-intel-core-2-duo-p8400-2-26ghz-14-1-wxga-3gb-ddr3-sdram-160gb-hdd-combo-drive-cd-rw-dvd-rom-gigabit-ethernet-wi-fi-windo-x75.jpg','.jpg',186133,224087,1,75,'2010-12-27 12:52:49','2010-12-27 12:52:49',0);
 /*!40000 ALTER TABLE `product_images` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -425,10 +427,11 @@ DROP TABLE IF EXISTS `roles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -437,6 +440,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,'admin','0000-00-00 00:00:00','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -448,9 +452,13 @@ DROP TABLE IF EXISTS `roles_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `roles_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -459,6 +467,7 @@ CREATE TABLE `roles_users` (
 
 LOCK TABLES `roles_users` WRITE;
 /*!40000 ALTER TABLE `roles_users` DISABLE KEYS */;
+INSERT INTO `roles_users` VALUES (1,325,1,'0000-00-00 00:00:00','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `roles_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -481,7 +490,7 @@ CREATE TABLE `schema_migrations` (
 
 LOCK TABLES `schema_migrations` WRITE;
 /*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
-INSERT INTO `schema_migrations` VALUES ('20100819000751'),('20100819035705'),('20100819194721'),('20100819195347'),('20100820213025'),('20100822060541'),('20100822061252'),('20100823052122'),('20100825015458'),('20100825211756'),('20100904060054'),('20101119024706'),('20101220050159'),('20101222034051'),('20101222040632'),('20101226023842'),('20110109214053'),('20110109221537'),('20110109232828'),('20110127190057'),('20110128071513');
+INSERT INTO `schema_migrations` VALUES ('20100819000751'),('20100819035705'),('20100819194721'),('20100819195347'),('20100820213025'),('20100822060541'),('20100822061252'),('20100823052122'),('20100825015458'),('20100825211756'),('20100904060054'),('20101119024706'),('20101220050159'),('20101222034051'),('20101222040632'),('20101226023842'),('20110109214053'),('20110109221537'),('20110109232828'),('20110127190057'),('20110128071513'),('20120510201738'),('20120511175217');
 /*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -581,7 +590,7 @@ CREATE TABLE `users` (
   `remember_token_expires_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=325 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=326 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -590,6 +599,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (325,'bikokid@gmail.com','fa774954415ec0bdf1a667baee134e464042521d','133a867938eb429f8a712356fd1020c2df40db8a','23238f0258cb41626ca41250168f7ebaf96c6f2f','2012-05-11 23:26:41','2012-05-11 23:26:41',NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -602,4 +612,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-04-28  7:55:21
+-- Dump completed on 2012-05-11 16:29:53
