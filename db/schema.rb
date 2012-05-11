@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510201738) do
+ActiveRecord::Schema.define(:version => 20120511175217) do
 
   create_table "cart_products", :force => true do |t|
     t.integer  "cart_id",    :null => false
@@ -179,12 +179,13 @@ ActiveRecord::Schema.define(:version => 20120510201738) do
   create_table "product_images", :force => true do |t|
     t.string   "filename"
     t.string   "content_type"
-    t.integer  "product_id",                  :null => false
+    t.integer  "product_id",                      :null => false
     t.integer  "parent_id",    :default => 0
     t.boolean  "thumbnail"
     t.integer  "width"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "hero",         :default => false
   end
 
   add_index "product_images", ["product_id", "parent_id"], :name => "index_product_images_on_product_id_and_parent_id"

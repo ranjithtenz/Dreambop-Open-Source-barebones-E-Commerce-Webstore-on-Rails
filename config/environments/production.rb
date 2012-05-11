@@ -67,8 +67,8 @@ ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = { :address        => 'smtp.gmail.com',
                                      :domain         => 'dreambop.com',
                                      :port           => 587,
-                                     :user_name => "support@dreambop.com",
-                                     :password => "2772radar7227",
+                                     :user_name => "thedude",
+                                     :password => "whiterussians",
                                      :authentication => :plain,
                                      :enable_starttls_auto => true
                                    }

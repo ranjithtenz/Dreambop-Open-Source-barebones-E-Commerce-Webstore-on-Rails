@@ -1,8 +1,11 @@
 #include Magick
+include MiniMagick
+
 class ProductImage < ActiveRecord::Base
   acts_as_tree :order => "filename"
   belongs_to :product
   validates_length_of :filename, :minimum => 4
+  before_create :create_thumbnails
 #  has_attachment :storage => :s3, 
 #                 :thumbnails => { :thumb => [150], :geometry => 'x150' }, 
 #                 :content_type => :image
@@ -15,7 +18,23 @@ class ProductImage < ActiveRecord::Base
     location = 'https://s3.amazonaws.com/' + BUCKET + '/' + self.filename
   end
 
-  def create_thumbs!
+  def create_thumbnails
+    puts "hello\n"
+    puts self.local_file
+    image = MiniMagick::Image.open( self.local_file.tempfile )
+    self.content_type = self.content_type.downcase
+    self.filename = self.product.id +    
+    puts 'here'
+    image.write( Rails.root + '/public/images/products/' + self.local_file )
+    image_tn300 = image.resize( "300x" )
+    image_tn300.write( Rails.root + '/public/images/products/' + self.local_file )
+    #if self.width != 150
+    #p_image = ProductImage.new(:parent_id => self.id, :filename => image_150_name, :content_type => self.content_type,  :product => self.product, :width => '150', :thumbnail => 1)
+    #image_tn150 = image.resize( "150x" )
+    #image_tn75 = image.resize( "75x" )
+  end
+
+  def old_create_thumbs!
     AWS::S3::Base.establish_connection!(
       :access_key_id     => 'FF00FFUUFFUUFFUUFUU00',
       :secret_access_key => '7373784848477383847748847'

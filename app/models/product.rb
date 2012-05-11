@@ -6,6 +6,7 @@ class Product < ActiveRecord::Base
   belongs_to :ds_vendor, :polymorphic => true
   belongs_to :category
   has_many :product_images, :order => 'width desc'
+  has_one :product_image, :conditions => { :hero => true }
 
 #  validates_uniqueness_of :title
   DS_VENDORS = [ 'Dsdi' ]

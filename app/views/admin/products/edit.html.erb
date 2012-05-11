@@ -38,7 +38,7 @@
   <meta property="og:description" content="<%= @product.description.gsub(%r{</?[^>]+?>}, '').gsub(/"/, '') %>"/>
 <% end %>
 
-<%= form_for([:admin, @product]) do |f| %>
+<%= form_for([:admin, @product], :multipart => true) do |f| %>
     <% if @product.errors.any? %>
       <% @product.errors.full_messages.each do |msg| %>  
         <%= msg %><br>
@@ -53,6 +53,17 @@
   <div class="section">PRODUCT DESCRIPTION</div>
   <div id="picture">
      <%= link_to(image_tag(@product.image(300), :style => 'max-width: 300px'), @product.image) %></td>
+     Upload a new photo:<br/>
+     <%= fields_for :product_image do |pf| %>
+        <%= pf.file_field :local_file %>
+      <% end %>
+    <% if @product_image.errors.any? %>
+        <br/>
+      <% @product_image.errors.full_messages.each do |msg| %>  
+        <%= msg %><br>
+      <% end %>  
+    <% end %>  
+
   </div>
   <div id="description">
     <span class=""><b><%= f.text_field :title %></b></span>
