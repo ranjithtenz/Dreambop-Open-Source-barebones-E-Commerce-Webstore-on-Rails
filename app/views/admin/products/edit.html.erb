@@ -57,7 +57,7 @@
      <%= fields_for :product_image do |pf| %>
         <%= pf.file_field :local_file %>
       <% end %>
-    <% if @product_image.errors.any? %>
+    <% if @product_image and @product_image.errors.any? %>
         <br/>
       <% @product_image.errors.full_messages.each do |msg| %>  
         <%= msg %><br>

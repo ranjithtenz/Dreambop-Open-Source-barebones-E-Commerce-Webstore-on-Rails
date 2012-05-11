@@ -1,16 +1,18 @@
-#include Magick
+require 'fileutils'
 include MiniMagick
+#include Magick
 
 class ProductImage < ActiveRecord::Base
   acts_as_tree :order => "filename"
   belongs_to :product
-  validates_length_of :filename, :minimum => 4
-  before_create :create_thumbnails
+
+  before_validation :create_local_copy
+
 #  has_attachment :storage => :s3, 
 #                 :thumbnails => { :thumb => [150], :geometry => 'x150' }, 
 #                 :content_type => :image
 
-  attr_accessor :local_file
+  attr_accessor :local_file, :uploaded_data
 
   BUCKET = 'dreambop'
 
@@ -18,9 +20,19 @@ class ProductImage < ActiveRecord::Base
     location = 'https://s3.amazonaws.com/' + BUCKET + '/' + self.filename
   end
 
+  def create_local_copy
+    
+    file = File.join("public", self.local_file)
+    self.filename = self.product.id.to_s + '-' + self.local_file
+    ldir = File.join(Rails.root, self.filename)
+    File.open(ldir, "wb") { |f| f.write(File.open(self.local_file).read)}
+    #FileUtils.cp tmp.path, ldir
+    validates_length_of(:filename, :minimum => 4)
+  end
   def create_thumbnails
-    puts "hello\n"
-    puts self.local_file
+=begin
+    FileUtils.cp file, Rails.root + '/zimage.jpg'
+    FileUtils.rm file
     image = MiniMagick::Image.open( self.local_file.tempfile )
     self.content_type = self.content_type.downcase
     self.filename = self.product.id +    
@@ -32,6 +44,7 @@ class ProductImage < ActiveRecord::Base
     #p_image = ProductImage.new(:parent_id => self.id, :filename => image_150_name, :content_type => self.content_type,  :product => self.product, :width => '150', :thumbnail => 1)
     #image_tn150 = image.resize( "150x" )
     #image_tn75 = image.resize( "75x" )
+=end
   end
 
   def old_create_thumbs!

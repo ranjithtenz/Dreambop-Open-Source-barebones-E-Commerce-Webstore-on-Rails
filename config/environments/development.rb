@@ -39,5 +39,5 @@ memcache_options = {
   :urlencode => false
 }
 
-WINDOWS = true
+windows = true
 CACHE = MemCache.new 'localhost:11211',  memcache_options
