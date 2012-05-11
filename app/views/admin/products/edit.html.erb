@@ -38,7 +38,7 @@
   <meta property="og:description" content="<%= @product.description.gsub(%r{</?[^>]+?>}, '').gsub(/"/, '') %>"/>
 <% end %>
 
-<%= form_for([:admin, @product], :multipart => true) do |f| %>
+<%= form_for([:admin, @product], :html => { :multipart => true}) do |f| %>
     <% if @product.errors.any? %>
       <% @product.errors.full_messages.each do |msg| %>  
         <%= msg %><br>

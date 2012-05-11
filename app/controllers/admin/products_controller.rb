@@ -22,7 +22,7 @@ class Admin::ProductsController < ApplicationController
         puts 'in cont: product_image new'
         @product_image.product = @product
         if @product_image.save
-          redirect_to product_path(@product)
+          redirect_to product_path(@product) and return
         else
           puts 'errors in product image save'
         end
