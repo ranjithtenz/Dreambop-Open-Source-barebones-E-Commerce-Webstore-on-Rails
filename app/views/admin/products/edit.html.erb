@@ -1,0 +1,102 @@
+<% content_for :page_stylesheet do -%>
+  <%= stylesheet_link_tag 'product', 'categories', 'multi-prod' %>
+<% end %>
+
+<% content_for :page_js do-%>
+<script type="text/javascript">
+        $(document).ready(function(){ 
+          $('#saved').click( function() { jqDialog.notify("You could <%= @product.saved_comp %> for that.", 3); return false; } );
+          FB.Event.subscribe('edge.create', function(response) {
+            //alert('page liked');
+            // do something with response.session
+          });
+          FB.Event.subscribe('comments.add', function(response) {
+            //alert('page liked');
+            // do something with response.session
+          });
+        });
+        $(window).load(function(){ 
+        });
+</script>
+<% end %>
+
+<% content_for :page_title do -%>
+  <%= @product.title %> : <%= number_to_currency(@product.price) %>
+<% end %>
+
+<% content_for :page_meta do -%>
+  <meta name="title" content="dreambop.com: <%= @product.title %>: <%= @product.category.display_name %>" />
+  <meta name="description" content="dreambop.com: <%= @product.category.display_name %> - <%= @product.description.gsub(%r{</?[^>]+?>}, '').gsub(/"/, '') %>" />
+  <meta name="keywords" content="<%= @product.title.to_s + ', ' + @product.manufacturer.to_s + ', ' + @product.description.gsub(%r{</?[^>]+?>}, '').gsub(/"/, '') %>" />
+  <!-- facebook page stuff -->
+  <meta property="og:title" content="<%= @product.title %>"/> 
+  <meta property="og:type" content="product"/> 
+  <meta property="og:image" content="<%= @product.image %>"/> 
+  <meta property="og:url" content="<%= product_url(@product) %>"/> 
+  <meta property="og:site_name" content="dreambop"/> 
+  <meta property="fb:admins" content="3614966"/>
+  <meta property="og:description" content="<%= @product.description.gsub(%r{</?[^>]+?>}, '').gsub(/"/, '') %>"/>
+<% end %>
+
+<%= form_for([:admin, @product]) do |f| %>
+    <% if @product.errors.any? %>
+      <% @product.errors.full_messages.each do |msg| %>  
+        <%= msg %><br>
+      <% end %>  
+    <% end %>  
+  <div id="admin_top_save_product">
+    <%= f.submit 'Save Changes' %>
+  </div>
+  <div id="breadcrumb">
+    <%= render :partial => 'locals/breadcrumb', :locals => { :breadcrumb => @breadcrumb } %>
+  </div>
+  <div class="section">PRODUCT DESCRIPTION</div>
+  <div id="picture">
+     <%= link_to(image_tag(@product.image(300), :style => 'max-width: 300px'), @product.image) %></td>
+  </div>
+  <div id="description">
+    <span class=""><b><%= f.text_field :title %></b></span>
+    <br/>
+    <span id="description-text" class=""><%= f.text_area :description %></span>
+  </div>
+  <div class="clear"></div>
+  <div id="price">
+    <div id="price-text"><%= number_to_currency(@product.price) %></div>
+    <div id="condition">Condition: New</div>
+    <div class="supporting_info">In stock: <%= f.text_field :availability %></div>
+    <div class="supporting_info">Normal Price: <%= f.text_field :msrp %> </div>
+    <% saved = @product.msrp - @product.price %>
+    <% if saved > 0 %>
+    <div class="supporting_info">You save: <a href='#' id="saved"><%= number_to_currency(@product.msrp - @product.price) %></a></div>
+    <% end %>
+    <div id="fb_like_btn">
+       <script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script><fb:like font="verdana" ref="<%= @product.id.to_s %>" href="<%= product_url(@product) %>" show_faces="true" width="200"></fb:like>
+    </div>
+    <div id="about_fb_like">
+      Like this page and get money off your purchase. Read more about <%= link_to 'the dreambop facebook coupon', :action => 'facebook_coupon', :controller => 'about' %>
+    </div>
+  </div>
+  <br/>
+  <br/>
+  <div class="clear"></div>
+  <div class="section">DETAILS</div>
+  <div id="details">
+    <p>
+      <a href="/manufacturers"><b>MANUFACTURER</b>:</a>
+      <%= f.text_field :manufacturer %>
+    </p>
+    <p>
+      <b>WEIGHT:</b>
+      <%= f.text_field :weight %> lb(s).
+    </p>
+  </div>
+  <div id="admin_btm_save_product">
+    <%= f.submit 'Save Changes' %>
+  </div>
+<% end %><!-- ends the form -->
+<div class="padprod"></div>
+<div class="section">RELATED PRODUCTS</div>
+<%= render :partial => 'locals/products', :locals => {:products => @related_products} %>
+<div class="section-footer">
+  <%= link_to 'See more related products . . .', :action => :show, :controller => :manufacturers, :id => @product.manufacturer.gsub(/ /, '+') %>
+</div>

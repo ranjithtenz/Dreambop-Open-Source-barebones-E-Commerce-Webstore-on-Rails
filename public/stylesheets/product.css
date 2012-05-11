@@ -69,3 +69,14 @@ span#description-text {
   font-size: 10px;
   width: 200px;
 }
+/*ADMIN CSS */
+#aedit {
+  margin-left: 85%;
+  width: 125px;
+}
+#admin_top_save_product {
+  margin-left: 85%;
+  width: 125px;
+}
+#admin_btm_save_product {
+}

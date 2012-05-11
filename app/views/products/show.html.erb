@@ -41,6 +41,11 @@
 <div id="breadcrumb">
   <%= render :partial => 'locals/breadcrumb', :locals => { :breadcrumb => @breadcrumb } %>
 </div>
+<% if current_user and current_user.has_role?('admin') %>
+  <div id="aedit">
+      <%= link_to 'Edit this product', edit_admin_product_path(@product) %>
+  </div>
+<% end %>
 <div class="section">PRODUCT DESCRIPTION</div>
 <div id="picture">
    <%= link_to(image_tag(@product.image(300), :style => 'max-width: 300px'), @product.image) %></td>
