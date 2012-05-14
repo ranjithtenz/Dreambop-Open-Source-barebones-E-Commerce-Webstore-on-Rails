@@ -6,29 +6,47 @@ class ProductImage < ActiveRecord::Base
   acts_as_tree :order => "filename"
   belongs_to :product
 
-  before_validation :create_local_copy
+  before_create :create_local_copy
 
 #  has_attachment :storage => :s3, 
 #                 :thumbnails => { :thumb => [150], :geometry => 'x150' }, 
 #                 :content_type => :image
 
-  attr_accessor :local_file, :uploaded_data
+  attr_accessor :remote_file
 
   BUCKET = 'dreambop'
+
+  def local_file
+    ldir = File.join("/images", "products")
+    location = File.join(ldir, self.filename)
+  end
 
   def public_filename
     location = 'https://s3.amazonaws.com/' + BUCKET + '/' + self.filename
   end
 
   def create_local_copy
-    
-    file = File.join("public", self.local_file.path)
-    self.filename = self.product.id.to_s + '-' + self.local_file.original_filename
-    ldir = File.join(Rails.root, self.filename)
-    File.open(ldir, "wb") { |f| f.write(File.open(self.local_file.path).read)}
-    #FileUtils.cp tmp.path, ldir
+    return true if self.thumbnail
+    file = File.join("public", self.remote_file.path)
+    ftype = File.extname( self.remote_file.original_filename )
+    self.filename = self.product.id.to_s + '-' + self.product.title.parameterize.to_s + ftype 
     validates_length_of(:filename, :minimum => 4)
+    ldir = File.join(Rails.root, "public", "images", "products", self.filename)
+    File.open(ldir, "wb") { |f| f.write(File.open(self.remote_file.path).read)}
+    self.content_type = File.extname( self.filename )
+    #make_x75
   end
+
+  def make_x75
+    buffer = StringIO.new(File.open(self.remote_file.path,"rb") { |f| f.read })
+    image = MiniMagick::Image.read(buffer)
+    image_tn75 = image.resize( "75x" )
+    image_fn = self.product.id.to_s + '-' + self.product.title.parameterize.to_s + "-x75" + self.content_type
+    image_lp = File.join(Rails.root, "public", "images", "products", image_fn)
+    image_tn75.write(image_fn)
+    ni = ProductImage.create(:filename => image_fn, :content_type => self.content_type, :hero => self.hero, :product => self.product, :parent => self, :thumbnail => true, :width => 75 )
+  end
+
   def create_thumbnails
 =begin
     FileUtils.cp file, Rails.root + '/zimage.jpg'

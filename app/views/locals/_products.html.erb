@@ -2,7 +2,7 @@
 <% products.each do |product| %>
   <div class="product">
     <div class="small_img">
-      <%= link_to(image_tag(product.image(150), :width => 150, :height => 150), product) %>
+      <%= link_to(image_tag(product.limage(150), :width => 150, :height => 150), product) %>
     </div>
     <div class="product-title">
       <%= link_to( truncate(product.title, {:length => 49}), product) %>

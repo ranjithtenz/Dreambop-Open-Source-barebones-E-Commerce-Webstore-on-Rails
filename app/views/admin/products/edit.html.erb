@@ -49,13 +49,14 @@
   </div>
   <div id="breadcrumb">
     <%= render :partial => 'locals/breadcrumb', :locals => { :breadcrumb => @breadcrumb } %>
+    <%= collection_select( :product, :category_id, @categories, :id, :name ) %>
   </div>
   <div class="section">PRODUCT DESCRIPTION</div>
   <div id="picture">
-     <%= link_to(image_tag(@product.image(300), :style => 'max-width: 300px'), @product.image) %></td>
+     <%= link_to(image_tag(@product.limage(300), :style => 'max-width: 300px'), @product.limage) %></td>
      Upload a new photo:<br/>
      <%= fields_for :product_image do |pf| %>
-        <%= pf.file_field :local_file %>
+        <%= pf.file_field :remote_file %>
       <% end %>
     <% if @product_image and @product_image.errors.any? %>
         <br/>
@@ -94,7 +95,8 @@
   <div id="details">
     <p>
       <a href="/manufacturers"><b>MANUFACTURER</b>:</a>
-      <%= f.text_field :manufacturer %>
+      <%= collection_select( :product, :manufacturer_id, @manufacturers, :id, :name ) %>
+      <%= link_to "Edit/Add", admin_manufacturers_path %>
     </p>
     <p>
       <b>WEIGHT:</b>
@@ -109,5 +111,5 @@
 <div class="section">RELATED PRODUCTS</div>
 <%= render :partial => 'locals/products', :locals => {:products => @related_products} %>
 <div class="section-footer">
-  <%= link_to 'See more related products . . .', :action => :show, :controller => :manufacturers, :id => @product.manufacturer.gsub(/ /, '+') %>
+  <%= link_to 'See more related products . . .', :action => :show, :controller => :manufacturers, :id => @product.manufacturer_id %>
 </div>

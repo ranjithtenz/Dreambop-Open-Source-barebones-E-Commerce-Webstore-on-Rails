@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120511175217) do
+ActiveRecord::Schema.define(:version => 20120514210441) do
 
   create_table "cart_products", :force => true do |t|
     t.integer  "cart_id",    :null => false
@@ -146,6 +147,13 @@ ActiveRecord::Schema.define(:version => 20120511175217) do
   add_index "ingram_micro_products", ["ingram_sku"], :name => "index_ingram_micro_products_on_ingram_sku", :unique => true
   add_index "ingram_micro_products", ["spex_essential_product_id"], :name => "index_ingram_micro_products_on_spex_essential_product_id", :unique => true
 
+  create_table "manufacturers", :force => true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "order_products", :force => true do |t|
     t.integer  "order_id"
     t.integer  "product_id"
@@ -190,24 +198,24 @@ ActiveRecord::Schema.define(:version => 20120511175217) do
   add_index "product_images", ["product_id", "parent_id"], :name => "index_product_images_on_product_id_and_parent_id"
 
   create_table "products", :force => true do |t|
-    t.string   "title",          :default => ""
+    t.string   "title",           :default => ""
     t.text     "description"
-    t.integer  "ds_vendor_id",   :default => 0
-    t.string   "ds_vendor_type", :default => ""
-    t.float    "msrp",           :default => 0.0
-    t.float    "reseller_price", :default => 0.0
-    t.string   "manufacturer",   :default => ""
-    t.float    "weight",         :default => 0.0
+    t.integer  "ds_vendor_id",    :default => 0
+    t.string   "ds_vendor_type",  :default => ""
+    t.float    "msrp",            :default => 0.0
+    t.float    "reseller_price",  :default => 0.0
+    t.float    "weight",          :default => 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "map",            :default => 0.0
-    t.integer  "category_id",    :default => 0,    :null => false
-    t.string   "upc_code",       :default => ""
-    t.string   "availability",   :default => "NA"
+    t.float    "map",             :default => 0.0
+    t.integer  "category_id",     :default => 0,    :null => false
+    t.string   "upc_code",        :default => ""
+    t.string   "availability",    :default => "NA"
+    t.integer  "manufacturer_id", :default => 1
   end
 
   add_index "products", ["category_id"], :name => "index_products_on_category_id"
-  add_index "products", ["title", "description", "manufacturer"], :name => "fulltext_product"
+  add_index "products", ["title", "description"], :name => "fulltext_product"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

@@ -31,7 +31,7 @@
   <!-- facebook page stuff -->
   <meta property="og:title" content="<%= @product.title %>"/> 
   <meta property="og:type" content="product"/> 
-  <meta property="og:image" content="<%= @product.image %>"/> 
+  <meta property="og:image" content="<%= @product.limage %>"/> 
   <meta property="og:url" content="<%= product_url(@product) %>"/> 
   <meta property="og:site_name" content="dreambop"/> 
   <meta property="fb:admins" content="3614966"/>
@@ -48,7 +48,7 @@
 <% end %>
 <div class="section">PRODUCT DESCRIPTION</div>
 <div id="picture">
-   <%= link_to(image_tag(@product.image(300), :style => 'max-width: 300px'), @product.image) %></td>
+   <%= link_to(image_tag(@product.limage(300), :style => 'max-width: 300px'), @product.limage) %></td>
 </div>
 <div id="description">
   <span class=""><b><%=h @product.title %></b></span>
@@ -107,7 +107,7 @@
   <% end %>
   <p>
     <a href="/manufacturers"><b>MANUFACTURER</b>:</a>
-    <%= link_to @product.manufacturer, :action => :show, :controller => :manufacturers, :id => @product.manufacturer.gsub(/ /, '+') %>
+    <%= link_to( @product.manufacturer.name, manufacturer_path(@product.manufacturer) ) %>
   </p>
 
   <p>
@@ -119,5 +119,5 @@
 <div class="section">RELATED PRODUCTS</div>
 <%= render :partial => 'locals/products', :locals => {:products => @related_products} %>
 <div class="section-footer">
-  <%= link_to 'See more related products . . .', :action => :show, :controller => :manufacturers, :id => @product.manufacturer.gsub(/ /, '+') %>
+  <%= link_to 'See more related products . . .', manufacturer_path(@product.manufacturer) %>
 </div>

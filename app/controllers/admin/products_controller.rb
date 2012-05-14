@@ -7,19 +7,22 @@ class Admin::ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id], :include => [:ds_vendor, :product_images])
+    @manufacturers = Manufacturer.all
     @product_image = @product.product_image
     @breadcrumb = @product.category.breadcrumb
-    @related_products = Product.find(:all, :conditions => [ 'products.manufacturer = ? and products.id != ?', @product.manufacturer, @product.id], :limit => 4, :include => [:product_image,:product_images]) 
+    @categories = Category.all
+    @related_products = Product.find(:all, :conditions => [ 'products.manufacturer_id = ? and products.id != ?', @product.manufacturer_id, @product.id], :limit => 4, :include => [:product_image,:product_images]) 
   end
 
   def update
     @product = Product.find(params[:id], :include => [:ds_vendor, :product_image, :product_images])
     @product_image = @product.product_image
     if @product.update_attributes(params[:product])
-      if params[:product_image]
-        puts 'in cont: product_image'
-        @product_image = ProductImage.new(params[:product_image])
-        puts 'in cont: product_image new'
+      if params[:product_image] and ! params[:product_image].empty?
+        @product.product_images.each do |im|
+          im.destroy
+        end
+        @product_image = ProductImage.new(params[:product_image].merge( {:hero => true} ))
         @product_image.product = @product
         if @product_image.save
           redirect_to product_path(@product) and return
@@ -27,8 +30,10 @@ class Admin::ProductsController < ApplicationController
           puts 'errors in product image save'
         end
       end
+      redirect_to product_path(@product) and return
     end
     flash[:notice] = "There was a problem"
+    @categories = Category.all
     @breadcrumb = @product.category.breadcrumb
     @related_products = Product.find(:all, :conditions => [ 'products.manufacturer = ? and products.id != ?', @product.manufacturer, @product.id], :limit => 4, :include => :product_images) 
     render :action => 'edit'

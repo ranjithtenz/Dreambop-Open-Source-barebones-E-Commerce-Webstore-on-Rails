@@ -101,7 +101,7 @@ class ProductsController < ApplicationController
       @breadcrumb = @product.category.breadcrumb
       Cache.put 'product_' + params[:id].to_s + '_breadcrumb', @breadcrumb
     end
-    @related_products = Product.find(:all, :conditions => [ 'products.manufacturer = ? and products.id != ?', @product.manufacturer, @product.id], :limit => 4, :include => :product_images) 
+    @related_products = Product.find(:all, :conditions => [ 'products.manufacturer_id = ? and products.id != ?', @product.manufacturer_id, @product.id], :limit => 4, :include => [:product_images, :category, :manufacturer]) 
 
     respond_to do |format|
       format.html # show.html.erb

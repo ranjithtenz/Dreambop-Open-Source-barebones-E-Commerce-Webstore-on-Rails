@@ -1,4 +1,6 @@
 Dreambop3::Application.routes.draw do
+  namespace :admin do resources :manufacturers end
+
   resource :cart
   resources :orders do
     collection do
@@ -6,6 +8,8 @@ Dreambop3::Application.routes.draw do
       get :paypal_complete 
     end
   end
+
+  resources :manufacturers
 
   resource :credit_card
 
@@ -83,6 +87,10 @@ Dreambop3::Application.routes.draw do
     resources :products
     controller :products do
       match 'products(/:action(/:id(.:format)))'
+    end
+    resources :manufacturers
+    controller :manufacturers do
+      match 'manufacturers(/:action(/:id(.:format)))'
     end
   end
 

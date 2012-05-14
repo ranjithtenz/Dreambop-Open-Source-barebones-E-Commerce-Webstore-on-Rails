@@ -5,17 +5,18 @@ class Product < ActiveRecord::Base
   @@per_page = 24
   belongs_to :ds_vendor, :polymorphic => true
   belongs_to :category
+  belongs_to :manufacturer
   has_many :product_images, :order => 'width desc'
   has_one :product_image, :conditions => { :hero => true }
 
 #  validates_uniqueness_of :title
   DS_VENDORS = [ 'Dsdi' ]
-  BUCKET = 'buymeyo_prod'
+  BUCKET = 'dreambop'
 
   before_save :sanitize_manufacturer
 
   def sanitize_manufacturer
-    self.manufacturer = Product.sanitize(self.manufacturer)
+    self.manufacturer.name = Product.sanitize(self.manufacturer.name)
   end
 
   def self.sanitize(name)
@@ -53,6 +54,36 @@ class Product < ActiveRecord::Base
     return width
   end
 
+  def limage(size = nil, hero = true)
+    i = nil
+    case size
+      when nil
+        i = self.product_images.detect { |pi| pi.thumbnail == false and pi.hero == hero  }
+      when 75
+        i = self.product_images.detect { |pi| pi.width == '75' and pi.hero == hero }
+      when 150
+        i = self.product_images.detect { |pi| pi.width == '150' and pi.hero == hero }
+      when 300
+        i = self.product_images.detect { |pi| pi.width == '300' and pi.hero == hero }
+    end
+    if i.nil?
+        i = self.product_images.first #find(:first, :conditions => {:order => 'width desc'})
+    end
+    if i.nil?
+      case size
+        when nil
+          return 'no_image.jpg'
+        when 75
+          return 'no_image-x75.jpg'
+        when 150
+          return 'no_image-x150.jpg'
+        when 300
+          return 'no_image.jpg'
+      end
+    else
+      i.local_file
+    end
+  end
   def image(size = nil)
     if self.ds_vendor_type == 'DandhProduct' or self.ds_vendor_type == 'DsdiProduct'
       case size

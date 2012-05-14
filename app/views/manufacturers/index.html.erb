@@ -12,7 +12,7 @@
     <div class="categories">
   <% end %>
       <span class="category">
-        <%= link_to manufacturer.manufacturer, :action => :show, :controller => 'manufacturers', :id => manufacturer.manufacturer.gsub(/ /, '+') %>
+        <%= link_to manufacturer.name, manufacturer_path(manufacturer)%>
       </span>
       <br/>
   <% if i % 20 == 19 or (i == total - 1) %>
