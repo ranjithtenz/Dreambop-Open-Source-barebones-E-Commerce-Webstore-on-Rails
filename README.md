@@ -1,7 +1,4 @@
-Dreambop-Open-Source-barebones-E-Commerce-Webstore-on-Rails
-===========================================================
-
-E-Commerce Webstore using rails 3.0.3 (upgrade to come soon)
+E-Commerce Webstore using rails 3.2.3 
 
 This store is mainly a barebones kind of set up for the basic things you need when making a store such as, products, images, related products, categories, shopping cart, checkout, credit card validation, and about us pages... with some facebook and javascript integration for fun things like values and stuff.  
 
@@ -48,3 +45,5 @@ matt@dreambop.com
 
 
 Thanks, enjoy responsibly. One thing to note is that if you are planning on selling things online, be sure only to ship to billing addressees matched on the credit card when doing your verification. Otherwise you risk losing that product to chargebacks, and not getting to keep the money charged to the credit card.  Email me for more info on that if you need help or advice. Always happy to help. Have fun. 
+
+from the office

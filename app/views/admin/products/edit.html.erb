@@ -111,5 +111,5 @@
 <div class="section">RELATED PRODUCTS</div>
 <%= render :partial => 'locals/products', :locals => {:products => @related_products} %>
 <div class="section-footer">
-  <%= link_to 'See more related products . . .', :action => :show, :controller => :manufacturers, :id => @product.manufacturer_id %>
+  <%= link_to 'See more related products . . .', manufacturer_path(@product.manufacturer) %>
 </div>
