@@ -1,4 +1,4 @@
-Dreambop3::Application.configure do
+FaucetCentral::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   config.action_mailer.default_url_options = { :host => 'localhost:3000'}
 
@@ -18,11 +18,17 @@ Dreambop3::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 
+  # Raise exception on mass assignment protection for Active Record models
+  config.active_record.mass_assignment_sanitizer = :strict
+
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+
+  #use this after upgrade to newer version of rails
+  #config.assets.logger = false
 
 end
 #ActionMailer::Base.default_url_options[:host] = "localhost:3000"

@@ -1,5 +1,8 @@
 class Order < ActiveRecord::Base
   attr_accessor :paypal_details
+
+  attr_accessible :user, :user_id 
+
   belongs_to :user
   belongs_to :credit_card
   belongs_to :shipping_address

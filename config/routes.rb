@@ -1,4 +1,4 @@
-Dreambop3::Application.routes.draw do
+FaucetCentral::Application.routes.draw do
   namespace :admin do resources :manufacturers end
 
   resource :cart

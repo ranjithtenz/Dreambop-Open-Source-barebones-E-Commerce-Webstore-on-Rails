@@ -10,7 +10,8 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def create 
-    @category = Category.new(params[:category])
+    @category = Category.new
+    @category.assign_attributes(params[:category], :as => :admin)
     if @category.save
       redirect_to edit_admin_category_path( @category )
     else
@@ -33,7 +34,8 @@ class Admin::CategoriesController < ApplicationController
 
   def update
     @category = Category.find(params[:id])
-    if @category.update_attributes(params[:category])
+    @category.assign_attributes(params[:category], :as => :admin)
+    if @category.save
       redirect_to edit_admin_category_path(@category)
     end
   end

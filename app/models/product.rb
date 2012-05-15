@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
 
+  attr_accessible :category_id, :title, :description, :availability, :msrp, :manufacturer_id, :weight, :as => :admin
 
   cattr_reader :per_page
   @@per_page = 24
@@ -72,18 +73,19 @@ class Product < ActiveRecord::Base
     if i.nil?
       case size
         when nil
-          return 'no_image.jpg'
+          return '/images/no_image.jpg'
         when 75
-          return 'no_image-x75.jpg'
+          return '/images/no_image-x75.jpg'
         when 150
-          return 'no_image-x150.jpg'
+          return '/images/no_image-x150.jpg'
         when 300
-          return 'no_image.jpg'
+          return '/images/no_image.jpg'
       end
     else
       i.local_file
     end
   end
+
   def image(size = nil)
     if self.ds_vendor_type == 'DandhProduct' or self.ds_vendor_type == 'DsdiProduct'
       case size

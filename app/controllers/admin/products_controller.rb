@@ -17,12 +17,14 @@ class Admin::ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id], :include => [:ds_vendor, :product_image, :product_images])
     @product_image = @product.product_image
-    if @product.update_attributes(params[:product])
+    @product.assign_attributes(params[:product], :as => :admin)
+    if @product.save
       if params[:product_image] and ! params[:product_image].empty?
         @product.product_images.each do |im|
           im.destroy
         end
-        @product_image = ProductImage.new(params[:product_image].merge( {:hero => true} ))
+        @product_image = ProductImage.new
+        @product_image.assign_attributes(params[:product_image].merge( {:hero => true} ), :as => :admin)
         @product_image.product = @product
         if @product_image.save
           redirect_to product_path(@product) and return

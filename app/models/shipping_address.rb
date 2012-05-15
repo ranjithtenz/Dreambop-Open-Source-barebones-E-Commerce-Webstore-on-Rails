@@ -1,4 +1,5 @@
 class ShippingAddress < ActiveRecord::Base
+  attr_accessible :first_name, :last_name, :address1, :address2, :city, :state, :zip, :current_default, :user, :user_id, :session_id
   belongs_to :user
   validates_presence_of :first_name, :last_name, :address1, :city, :state, :zip
   validate :valid_address

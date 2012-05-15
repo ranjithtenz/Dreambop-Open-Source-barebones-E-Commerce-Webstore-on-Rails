@@ -56,7 +56,7 @@
 <% @products.each do |product| 
 %>
   <tr class="<%=cycle('odd', 'even') %>">
-    <td class="item_pic"><%= link_to(image_tag(product.image(75), :width => 75, :height => 75), product) %></td>
+    <td class="item_pic"><%= link_to(image_tag(product.limage(75), :width => 75, :height => 75), product) %></td>
     <td><%= link_to(truncate(product.title, :length => 49), product) %></td>
     <td><%= number_to_currency(product.price) %></td>
   </tr>

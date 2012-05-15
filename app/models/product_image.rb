@@ -3,7 +3,10 @@ include MiniMagick
 #include Magick
 
 class ProductImage < ActiveRecord::Base
+  attr_accessible :remote_file, :hero, :as => :admin
+  
   acts_as_tree :order => "filename"
+
   belongs_to :product
 
   before_create :create_local_copy

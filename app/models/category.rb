@@ -1,4 +1,6 @@
 class Category < ActiveRecord::Base
+  attr_accessible :parent_id, :name, :as => :admin
+
   acts_as_tree :order => "name"
 
   before_create :sanitize_name

@@ -2,7 +2,7 @@
 require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
-Dreambop3::Application.initialize!
+FaucetCentral::Application.initialize!
 #gem "aws-s3", "0.5.1", :require_as => "aws/s3"
 #gem "shipping"
 gem 'will_paginate'

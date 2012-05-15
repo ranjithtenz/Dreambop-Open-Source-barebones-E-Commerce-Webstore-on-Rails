@@ -1,4 +1,7 @@
 class CreditCard < ActiveRecord::Base
+
+  attr_accessible :phone_number, :address, :city, :state, :zip, :first_name, :last_name, :number, :verification_value, :month, :year, :user_id
+
   belongs_to :user
   validates_presence_of :address, :city, :state, :zip, :number, :first_name, :last_name, :month, :year, :phone_number #, :verification_value
   validates_length_of :number, :within => 13..16,  :too_long => "your card number is too long", :too_short => "your card number is too short"
